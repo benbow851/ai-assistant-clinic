@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '@/components/Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Menu, X } from 'lucide-react';
+import { useTheme } from '@/hooks/use-theme';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Header = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isDark, toggle } = useTheme();
 
   const navLinks = [
     { to: '/', label: 'News' },
@@ -40,16 +42,34 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
+
+          {/* Theme Toggle */}
+          <button
+            onClick={toggle}
+            className="ml-2 p-2 rounded-full text-nerd-cloud hover:text-white hover:bg-white/10 transition-all duration-200"
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
         </nav>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-nerd-cloud hover:text-white p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile: Theme Toggle + Hamburger */}
+        <div className="md:hidden flex items-center gap-1">
+          <button
+            onClick={toggle}
+            className="text-nerd-cloud hover:text-white p-2"
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button
+            className="text-nerd-cloud hover:text-white p-2"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
