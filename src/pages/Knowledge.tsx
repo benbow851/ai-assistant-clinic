@@ -28,6 +28,27 @@ const serviceCategoryColors: Record<string, string> = {
 const getCategoryBadge = (cat: string) =>
   serviceCategoryColors[cat] || 'bg-muted text-muted-foreground border-border';
 
+// ── Complementary (opposite) card backgrounds per category ──
+// Purple↔Yellow, Pink↔Teal, Orange↔Blue, Blue↔Orange, Green↔Rose, Teal↔Pink,
+// Yellow↔Purple, Red↔Cyan, Amber↔Indigo, Rose↔Green, Indigo↔Amber, Sky↔Red, Emerald↔Pink
+const serviceCategoryCardBg: Record<string, string> = {
+  Botox: 'bg-yellow-50 dark:bg-yellow-950/30 border-yellow-200 dark:border-yellow-800/40',
+  Filler: 'bg-teal-50 dark:bg-teal-950/30 border-teal-200 dark:border-teal-800/40',
+  Laser: 'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800/40',
+  'Skin Tightening': 'bg-orange-50 dark:bg-orange-950/30 border-orange-200 dark:border-orange-800/40',
+  'Vitamin Drip': 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/40',
+  Facial: 'bg-pink-50 dark:bg-pink-950/30 border-pink-200 dark:border-pink-800/40',
+  Hair: 'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-800/40',
+  Body: 'bg-cyan-50 dark:bg-cyan-950/30 border-cyan-200 dark:border-cyan-800/40',
+  Package: 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-200 dark:border-indigo-800/40',
+  'Acne & Scar': 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800/40',
+  'Thread Lift': 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/40',
+  Consultation: 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800/40',
+  'Check-up': 'bg-fuchsia-50 dark:bg-fuchsia-950/30 border-fuchsia-200 dark:border-fuchsia-800/40',
+};
+const getCategoryCardBg = (cat: string) =>
+  serviceCategoryCardBg[cat] || 'bg-card border-border';
+
 const faqCategoryColors: Record<string, string> = {
   'การจอง': 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/20',
   Botox: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/20',
@@ -100,7 +121,7 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
 
 // ── Service Card ──
 const ServiceCard = ({ service }: { service: ClinicService }) => (
-  <div className="bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col">
+  <div className={cn("rounded-2xl border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col", getCategoryCardBg(service.category))}>
     <div className="flex items-center justify-between gap-2 mb-3">
       <span className={cn('text-[11px] font-semibold px-2.5 py-1 rounded-full border', getCategoryBadge(service.category))}>
         {service.category}
