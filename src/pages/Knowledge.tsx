@@ -107,8 +107,8 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
         className={cn(
           "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border",
           active === cat
-            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-            : 'bg-card text-foreground border-border hover:border-accent/40 hover:shadow-sm'
+            ? 'bg-[#4d62a7] text-white border-[#4d62a7] shadow-md'
+            : 'bg-card text-foreground border-border hover:border-[#4d62a7]/40 hover:shadow-sm'
         )}
       >
         {cat}
