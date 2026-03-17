@@ -16,7 +16,7 @@ const Header = () => {
     { to: '/webhooks', label: 'Webhooks' },
     { to: '/chat-editor', label: 'Chat Editor' },
     { to: '/credentials', label: '🔐 Credentials' },
-    { to: '/knowledge', label: '📚 Knowledge' },
+    { to: '/knowledge', label: '📚 Knowledge Base' },
   ];
 
   return (
