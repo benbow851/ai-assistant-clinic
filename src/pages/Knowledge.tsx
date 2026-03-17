@@ -121,7 +121,7 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
 
 // ── Service Card ──
 const ServiceCard = ({ service }: { service: ClinicService }) => (
-  <div className="bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col">
+  <div className={cn("rounded-2xl border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col", getCategoryCardBg(service.category))}>
     <div className="flex items-center justify-between gap-2 mb-3">
       <span className={cn('text-[11px] font-semibold px-2.5 py-1 rounded-full border', getCategoryBadge(service.category))}>
         {service.category}
