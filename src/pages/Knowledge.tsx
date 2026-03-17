@@ -9,53 +9,51 @@ import { cn } from '@/lib/utils';
 import { Search, Zap, HelpCircle, Users, Clock, User, Sparkles, RefreshCw, BadgeDollarSign, Target, Calendar, Globe, Star, ClipboardList } from 'lucide-react';
 import brandAmbassador from '@/assets/brand-ambassador.png';
 
-// ── Category badge color map (light + dark friendly) ──
+// ── Category badge color map ──
 const serviceCategoryColors: Record<string, string> = {
-  Botox: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/20',
-  Filler: 'bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-500/20',
-  Laser: 'bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/20',
-  'Skin Tightening': 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/20',
-  'Vitamin Drip': 'bg-green-500/15 text-green-700 dark:text-green-300 border-green-500/20',
-  Facial: 'bg-teal-500/15 text-teal-700 dark:text-teal-300 border-teal-500/20',
-  Hair: 'bg-yellow-500/15 text-yellow-700 dark:text-yellow-300 border-yellow-500/20',
-  Body: 'bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/20',
-  Package: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/20',
-  'Acne & Scar': 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/20',
-  'Thread Lift': 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/20',
-  Consultation: 'bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/20',
-  'Check-up': 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/20',
+  Botox: 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
+  Filler: 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
+  Laser: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
+  'Skin Tightening': 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
+  'Vitamin Drip': 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
+  Facial: 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
+  Hair: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
+  Body: 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
+  Package: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
+  'Acne & Scar': 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
+  'Thread Lift': 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
+  Consultation: 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
+  'Check-up': 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
 };
 const getCategoryBadge = (cat: string) =>
   serviceCategoryColors[cat] || 'bg-muted text-muted-foreground border-border';
 
-// ── Complementary (opposite) card backgrounds per category ──
-// Purple↔Yellow, Pink↔Teal, Orange↔Blue, Blue↔Orange, Green↔Rose, Teal↔Pink,
-// Yellow↔Purple, Red↔Cyan, Amber↔Indigo, Rose↔Green, Indigo↔Amber, Sky↔Red, Emerald↔Pink
+// ── Card backgrounds per category – brand-aligned tints ──
 const serviceCategoryCardBg: Record<string, string> = {
-  Botox: 'bg-yellow-50 dark:bg-yellow-950/30 border-yellow-200 dark:border-yellow-800/40',
-  Filler: 'bg-teal-50 dark:bg-teal-950/30 border-teal-200 dark:border-teal-800/40',
-  Laser: 'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800/40',
-  'Skin Tightening': 'bg-orange-50 dark:bg-orange-950/30 border-orange-200 dark:border-orange-800/40',
-  'Vitamin Drip': 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/40',
-  Facial: 'bg-pink-50 dark:bg-pink-950/30 border-pink-200 dark:border-pink-800/40',
-  Hair: 'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-800/40',
-  Body: 'bg-cyan-50 dark:bg-cyan-950/30 border-cyan-200 dark:border-cyan-800/40',
-  Package: 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-200 dark:border-indigo-800/40',
-  'Acne & Scar': 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800/40',
-  'Thread Lift': 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/40',
-  Consultation: 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800/40',
-  'Check-up': 'bg-fuchsia-50 dark:bg-fuchsia-950/30 border-fuchsia-200 dark:border-fuchsia-800/40',
+  Botox: 'bg-[#4d62a7]/[0.06] border-[#4d62a7]/15',
+  Filler: 'bg-[#bf415c]/[0.06] border-[#bf415c]/15',
+  Laser: 'bg-[#f7991a]/[0.06] border-[#f7991a]/15',
+  'Skin Tightening': 'bg-[#4d62a7]/[0.04] border-[#4d62a7]/12',
+  'Vitamin Drip': 'bg-[#add099]/[0.15] border-[#add099]/25',
+  Facial: 'bg-[#bf415c]/[0.04] border-[#bf415c]/12',
+  Hair: 'bg-[#f7991a]/[0.04] border-[#f7991a]/12',
+  Body: 'bg-[#4d62a7]/[0.08] border-[#4d62a7]/18',
+  Package: 'bg-[#f7991a]/[0.08] border-[#f7991a]/18',
+  'Acne & Scar': 'bg-[#bf415c]/[0.08] border-[#bf415c]/18',
+  'Thread Lift': 'bg-[#4d62a7]/[0.06] border-[#4d62a7]/15',
+  Consultation: 'bg-[#add099]/[0.12] border-[#add099]/20',
+  'Check-up': 'bg-[#add099]/[0.12] border-[#add099]/20',
 };
 const getCategoryCardBg = (cat: string) =>
   serviceCategoryCardBg[cat] || 'bg-card border-border';
 
 const faqCategoryColors: Record<string, string> = {
-  'การจอง': 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/20',
-  Botox: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/20',
-  Filler: 'bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-500/20',
-  Laser: 'bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/20',
+  'การจอง': 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
+  Botox: 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
+  Filler: 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
+  Laser: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
   'ทั่วไป': 'bg-muted text-muted-foreground border-border',
-  'ราคา': 'bg-green-500/15 text-green-700 dark:text-green-300 border-green-500/20',
+  'ราคา': 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
 };
 const getFaqBadge = (cat: string) => faqCategoryColors[cat] || 'bg-muted text-muted-foreground border-border';
 
@@ -109,8 +107,8 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
         className={cn(
           "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border",
           active === cat
-            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-            : 'bg-card text-foreground border-border hover:border-accent/40 hover:shadow-sm'
+            ? 'bg-[#4d62a7] text-white border-[#4d62a7] shadow-md'
+            : 'bg-card text-foreground border-border hover:border-[#4d62a7]/40 hover:shadow-sm'
         )}
       >
         {cat}
@@ -142,7 +140,7 @@ const ServiceCard = ({ service }: { service: ClinicService }) => (
     <div className="h-px bg-border mb-3" />
 
     <div className="flex flex-col gap-1.5 text-xs mt-auto">
-      <span className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5 text-[13px]">
+      <span className="text-emerald-600 font-bold flex items-center gap-1.5 text-[13px]">
         <BadgeDollarSign size={14} /> {service.price_min} – {service.price_max} บาท
       </span>
       <span className="text-muted-foreground flex items-center gap-1.5"><Sparkles size={12} className="text-nerd-orange" /> {service.expected_result}</span>
@@ -294,19 +292,19 @@ const Knowledge = () => {
           <TabsList className="w-full bg-card border border-border mb-8 h-14 p-1.5 rounded-2xl shadow-sm">
             <TabsTrigger
               value="services"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
             >
               💉 บริการ
             </TabsTrigger>
             <TabsTrigger
               value="faq"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
             >
               ❓ FAQ
             </TabsTrigger>
             <TabsTrigger
               value="staff"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
             >
               👩‍⚕️ ทีมแพทย์
             </TabsTrigger>
