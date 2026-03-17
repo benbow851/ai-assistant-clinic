@@ -1,0 +1,81 @@
+
+@tailwind components;
+
+@layer components {
+  .chat-bubble {
+    @apply p-3 rounded-lg max-w-[80%] mb-2;
+    transition: all 0.3s ease;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  .chat-bubble-in {
+    @apply bg-nerd-navy text-white;
+  }
+
+  .chat-bubble-out {
+    @apply bg-nerd-blue text-white;
+  }
+
+  .chat-button {
+    @apply fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-lg
+           bg-nerd-blue hover:bg-nerd-navy
+           flex items-center justify-center
+           transition-all duration-300 ease-in-out;
+  }
+
+  .chat-button:hover {
+    @apply transform scale-110;
+  }
+
+  .chat-window {
+    @apply fixed bottom-24 right-6 w-80 h-96 bg-white rounded-xl shadow-xl
+           border border-nerd-cloud overflow-hidden
+           transition-all duration-300 ease-in-out
+           opacity-0 translate-y-4 scale-95 pointer-events-none;
+  }
+
+  .chat-window-open {
+    @apply opacity-100 translate-y-0 scale-100 pointer-events-auto;
+  }
+
+  @media (max-width: 640px) {
+    [data-state="open"] .dialog-content {
+      @apply w-full max-w-full h-full max-h-full rounded-none fixed inset-0 m-0;
+    }
+    [data-state="open"] .dialog-content {
+      transform: none !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+  }
+
+  .markdown-content {
+    @apply text-base leading-relaxed text-white;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  .markdown-content p { @apply mb-2; }
+  .markdown-content h1, .markdown-content h2, .markdown-content h3, .markdown-content h4 {
+    @apply font-bold mt-3 mb-2;
+  }
+  .markdown-content h1 { @apply text-xl; }
+  .markdown-content h2 { @apply text-lg; }
+  .markdown-content h3, .markdown-content h4 { @apply text-base; }
+  .markdown-content ul, .markdown-content ol { @apply pl-5 mb-2; }
+  .markdown-content ul { @apply list-disc; }
+  .markdown-content ol { @apply list-decimal; }
+  .markdown-content li { @apply mb-1; }
+  .markdown-content code { @apply font-mono bg-white/10 px-1 py-0.5 rounded text-sm; }
+  .markdown-content pre { @apply bg-white/10 p-2 rounded mb-2 overflow-x-auto; }
+  .markdown-content a { @apply text-nerd-blue underline; }
+  .markdown-content blockquote { @apply border-l-4 border-nerd-cloud pl-3 italic my-2; }
+
+  .preset-query-button {
+    @apply text-xs font-semibold px-3 py-1.5 rounded-full border border-nerd-cloud transition-colors duration-200;
+    @apply hover:bg-nerd-cloud;
+  }
+}

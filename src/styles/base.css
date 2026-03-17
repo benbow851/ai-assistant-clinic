@@ -1,0 +1,60 @@
+
+@tailwind base;
+
+@layer base {
+  :root {
+    --background: 210 20% 97%;
+    --foreground: 215 28% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 14%;
+    --primary: 215 28% 14%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 37% 47%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 18% 93%;
+    --muted-foreground: 210 12% 46%;
+    --accent: 222 37% 47%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 348 52% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 222 37% 47%;
+    --radius: 0.75rem;
+
+    /* NerdOptimize brand tokens */
+    --nerd-navy: 210 20% 14%;
+    --nerd-blue: 222 37% 47%;
+    --nerd-pink: 348 50% 49%;
+    --nerd-orange: 37 93% 53%;
+    --nerd-cloud: 214 30% 87%;
+    --nerd-green: 112 30% 72%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,9 @@
+
+@tailwind components;
+
+@layer components {
+  .snes-card ul { @apply pl-0; }
+  .snes-card ul li { @apply mb-2; }
+  .markdown-content ul { @apply mb-3; }
+  .markdown-content ul li { @apply mb-2 list-item leading-tight; }
+}

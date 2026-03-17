@@ -1,0 +1,88 @@
+
+@tailwind components;
+
+@layer components {
+  /* ─── Buttons ─── */
+  .pixel-button {
+    @apply px-4 py-2 bg-primary text-primary-foreground font-semibold text-xs rounded-lg
+    shadow-sm hover:opacity-90
+    active:translate-y-[1px]
+    transition-all duration-200 cursor-pointer flex items-center gap-1.5;
+  }
+
+  /* ─── Container ─── */
+  .snes-container {
+    @apply max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-10;
+  }
+
+  /* ─── News Card ─── */
+  .news-card {
+    @apply relative bg-card rounded-2xl border border-border p-6
+    transition-all duration-300 cursor-default overflow-hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .news-card:hover {
+    box-shadow: 0 4px 24px rgba(77, 98, 167, 0.14), 0 1px 4px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+    border-color: rgba(77, 98, 167, 0.5);
+  }
+
+  .news-card--unread {
+    border-left: 3px solid #4d62a7;
+  }
+
+  .news-card--read {
+    @apply opacity-80;
+  }
+
+  .news-card--read:hover {
+    @apply opacity-100;
+  }
+
+  /* ─── News Grid ─── */
+  .news-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-5;
+  }
+
+  /* ─── Action Buttons ─── */
+  .news-action-btn {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg
+    transition-all duration-150 border cursor-pointer;
+  }
+
+  .news-action-btn--read {
+    color: #4d62a7;
+    border-color: rgba(77, 98, 167, 0.3);
+    background: rgba(77, 98, 167, 0.06);
+  }
+
+  .news-action-btn--read:hover {
+    background: rgba(77, 98, 167, 0.15);
+    border-color: rgba(77, 98, 167, 0.5);
+  }
+
+  .news-action-btn--delete {
+    @apply text-destructive border-destructive/20 bg-destructive/5
+    hover:bg-destructive/10 hover:border-destructive/30;
+  }
+
+  /* ─── Legacy compatibility ─── */
+  .snes-card {
+    @apply relative bg-card rounded-2xl border border-border p-6 transition-all duration-300;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .snes-card:hover {
+    box-shadow: 0 4px 24px rgba(77, 98, 167, 0.12), 0 1px 4px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+  }
+
+  .pixel-border {
+    @apply border-2 border-foreground relative;
+  }
+
+  .delete-button {
+    @apply text-destructive font-semibold text-xs px-3 py-1 rounded-md border border-destructive/20;
+  }
+}
