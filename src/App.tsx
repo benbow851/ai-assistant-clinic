@@ -24,6 +24,7 @@ const App = () => (
         <Route path="/webhooks" element={<Webhooks />} />
         <Route path="/chat-editor" element={<ChatEditor />} />
         <Route path="/credentials" element={<Credentials />} />
+        <Route path="/knowledge" element={<Knowledge />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
