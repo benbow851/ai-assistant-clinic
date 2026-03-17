@@ -96,10 +96,9 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				'sans': ['Poppins', 'system-ui', 'sans-serif'],
-				'poppins': ['Poppins', 'sans-serif'],
-				'pixelated': ['Press Start 2P', 'cursive'],
-				'retro': ['Poppins', 'sans-serif'],
+				'sans': ['Google Sans', 'Product Sans', 'system-ui', 'sans-serif'],
+				'display': ['Google Sans Display', 'Google Sans', 'system-ui', 'sans-serif'],
+				'google': ['Google Sans', 'Product Sans', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {

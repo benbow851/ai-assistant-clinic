@@ -9,34 +9,34 @@ import { cn } from '@/lib/utils';
 import { Search, Zap, HelpCircle, Users, Clock, User, Sparkles, RefreshCw, BadgeDollarSign, Target, Calendar, Globe, Star, ClipboardList } from 'lucide-react';
 import brandAmbassador from '@/assets/brand-ambassador.png';
 
-// ── Category badge color map ──
+// ── Category badge color map (light + dark friendly) ──
 const serviceCategoryColors: Record<string, string> = {
-  Botox: 'bg-purple-100 text-purple-700 border-purple-200',
-  Filler: 'bg-pink-100 text-pink-700 border-pink-200',
-  Laser: 'bg-orange-100 text-orange-700 border-orange-200',
-  'Skin Tightening': 'bg-blue-100 text-blue-700 border-blue-200',
-  'Vitamin Drip': 'bg-green-100 text-green-700 border-green-200',
-  Facial: 'bg-teal-100 text-teal-700 border-teal-200',
-  Hair: 'bg-yellow-100 text-yellow-700 border-yellow-200',
-  Body: 'bg-red-100 text-red-700 border-red-200',
-  Package: 'bg-amber-100 text-amber-700 border-amber-200',
-  'Acne & Scar': 'bg-rose-100 text-rose-700 border-rose-200',
-  'Thread Lift': 'bg-indigo-100 text-indigo-700 border-indigo-200',
-  Consultation: 'bg-sky-100 text-sky-700 border-sky-200',
-  'Check-up': 'bg-emerald-100 text-emerald-700 border-emerald-200',
+  Botox: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/20',
+  Filler: 'bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-500/20',
+  Laser: 'bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/20',
+  'Skin Tightening': 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/20',
+  'Vitamin Drip': 'bg-green-500/15 text-green-700 dark:text-green-300 border-green-500/20',
+  Facial: 'bg-teal-500/15 text-teal-700 dark:text-teal-300 border-teal-500/20',
+  Hair: 'bg-yellow-500/15 text-yellow-700 dark:text-yellow-300 border-yellow-500/20',
+  Body: 'bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/20',
+  Package: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/20',
+  'Acne & Scar': 'bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/20',
+  'Thread Lift': 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/20',
+  Consultation: 'bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/20',
+  'Check-up': 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/20',
 };
 const getCategoryBadge = (cat: string) =>
-  serviceCategoryColors[cat] || 'bg-gray-100 text-gray-600 border-gray-200';
+  serviceCategoryColors[cat] || 'bg-muted text-muted-foreground border-border';
 
 const faqCategoryColors: Record<string, string> = {
-  'การจอง': 'bg-blue-100 text-blue-700 border-blue-200',
-  Botox: 'bg-purple-100 text-purple-700 border-purple-200',
-  Filler: 'bg-pink-100 text-pink-700 border-pink-200',
-  Laser: 'bg-orange-100 text-orange-700 border-orange-200',
-  'ทั่วไป': 'bg-gray-100 text-gray-600 border-gray-200',
-  'ราคา': 'bg-green-100 text-green-700 border-green-200',
+  'การจอง': 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/20',
+  Botox: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/20',
+  Filler: 'bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-500/20',
+  Laser: 'bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/20',
+  'ทั่วไป': 'bg-muted text-muted-foreground border-border',
+  'ราคา': 'bg-green-500/15 text-green-700 dark:text-green-300 border-green-500/20',
 };
-const getFaqBadge = (cat: string) => faqCategoryColors[cat] || 'bg-gray-100 text-gray-600 border-gray-200';
+const getFaqBadge = (cat: string) => faqCategoryColors[cat] || 'bg-muted text-muted-foreground border-border';
 
 // ── Avatar colors from brand palette ──
 const avatarColors = ['#4d62a7', '#bf415c', '#f7991a', '#add099', '#a14c46', '#1d252d'];
@@ -58,8 +58,8 @@ const StatPill = ({ icon: Icon, label, value }: { icon: React.ElementType; label
   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5 border border-white/15">
     <Icon size={15} className="text-nerd-orange flex-shrink-0" />
     <div>
-      <p className="text-white/60 text-[10px] font-medium uppercase tracking-wide leading-none mb-0.5 font-poppins">{label}</p>
-      <p className="text-white text-sm font-bold leading-none font-poppins">{value}</p>
+      <p className="text-white/60 text-[10px] font-medium uppercase tracking-wide leading-none mb-0.5">{label}</p>
+      <p className="text-white text-sm font-bold leading-none">{value}</p>
     </div>
   </div>
 );
@@ -73,7 +73,7 @@ const SearchInput = ({ value, onChange, placeholder }: { value: string; onChange
       value={value}
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-sm font-poppins outline-none focus:border-nerd-blue focus:ring-2 focus:ring-nerd-blue/10 transition-all shadow-sm"
+      className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all shadow-sm"
     />
   </div>
 );
@@ -86,10 +86,10 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
         key={cat}
         onClick={() => onChange(cat)}
         className={cn(
-          "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border font-poppins",
+          "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border",
           active === cat
-            ? 'bg-nerd-navy text-white border-nerd-navy shadow-sm'
-            : 'bg-white text-foreground border-border hover:border-nerd-blue/40 hover:shadow-sm'
+            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+            : 'bg-card text-foreground border-border hover:border-accent/40 hover:shadow-sm'
         )}
       >
         {cat}
@@ -100,32 +100,32 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
 
 // ── Service Card ──
 const ServiceCard = ({ service }: { service: ClinicService }) => (
-  <div className="bg-white rounded-2xl border border-border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col">
+  <div className="bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col">
     <div className="flex items-center justify-between gap-2 mb-3">
-      <span className={cn('text-[11px] font-semibold px-2.5 py-1 rounded-full border font-poppins', getCategoryBadge(service.category))}>
+      <span className={cn('text-[11px] font-semibold px-2.5 py-1 rounded-full border', getCategoryBadge(service.category))}>
         {service.category}
       </span>
       <span className="text-muted-foreground text-[11px] font-mono">{service.service_code}</span>
     </div>
 
-    <h3 className="text-nerd-navy font-bold text-[15px] leading-snug mb-1.5 font-poppins">{service.name}</h3>
-    <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2 mb-4 font-poppins">{service.description}</p>
+    <h3 className="text-foreground font-bold text-[15px] leading-snug mb-1.5">{service.name}</h3>
+    <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2 mb-4">{service.description}</p>
 
     <div className="h-px bg-border mb-3" />
 
-    <div className="flex flex-col gap-1.5 text-xs text-muted-foreground mb-3 font-poppins">
-      <span className="flex items-center gap-1.5"><Clock size={13} className="text-nerd-blue" /> {service.duration_minutes} นาที</span>
-      <span className="flex items-center gap-1.5"><User size={13} className="text-nerd-blue" /> {service.age_recommendation}</span>
+    <div className="flex flex-col gap-1.5 text-xs text-muted-foreground mb-3">
+      <span className="flex items-center gap-1.5"><Clock size={13} className="text-accent" /> {service.duration_minutes} นาที</span>
+      <span className="flex items-center gap-1.5"><User size={13} className="text-accent" /> {service.age_recommendation}</span>
     </div>
 
     <div className="h-px bg-border mb-3" />
 
-    <div className="flex flex-col gap-1.5 text-xs font-poppins mt-auto">
-      <span className="text-nerd-green font-bold flex items-center gap-1.5 text-[13px]">
-        <BadgeDollarSign size={14} className="text-nerd-green" /> {service.price_min} – {service.price_max} บาท
+    <div className="flex flex-col gap-1.5 text-xs mt-auto">
+      <span className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5 text-[13px]">
+        <BadgeDollarSign size={14} /> {service.price_min} – {service.price_max} บาท
       </span>
       <span className="text-muted-foreground flex items-center gap-1.5"><Sparkles size={12} className="text-nerd-orange" /> {service.expected_result}</span>
-      <span className="text-muted-foreground flex items-center gap-1.5"><RefreshCw size={12} className="text-nerd-blue" /> {service.recommended_sessions}</span>
+      <span className="text-muted-foreground flex items-center gap-1.5"><RefreshCw size={12} className="text-accent" /> {service.recommended_sessions}</span>
     </div>
   </div>
 );
@@ -136,26 +136,26 @@ const StaffCard = ({ staff }: { staff: ClinicStaff }) => {
   const initial = staff.full_name.charAt(0);
 
   return (
-    <div className="bg-white rounded-2xl border border-border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center">
+    <div className="bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center">
       <div
-        className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold mb-3 shadow-md font-poppins"
+        className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold mb-3 shadow-md"
         style={{ backgroundColor: color }}
       >
         {initial}
       </div>
-      <h3 className="text-nerd-navy font-bold text-sm mb-1 font-poppins">{staff.full_name}</h3>
-      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-nerd-blue/10 text-nerd-blue border border-nerd-blue/20 mb-4 font-poppins">
+      <h3 className="text-foreground font-bold text-sm mb-1">{staff.full_name}</h3>
+      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/20 mb-4">
         {staff.position}
       </span>
 
       <div className="h-px bg-border w-full mb-4" />
 
-      <div className="w-full flex flex-col gap-2 text-xs text-muted-foreground text-left font-poppins">
+      <div className="w-full flex flex-col gap-2 text-xs text-muted-foreground text-left">
         <span className="flex items-center gap-2"><Target size={13} className="text-nerd-pink flex-shrink-0" /> {staff.specialties}</span>
-        <span className="flex items-center gap-2"><Calendar size={13} className="text-nerd-blue flex-shrink-0" /> {staff.working_days} · {staff.working_hours}</span>
+        <span className="flex items-center gap-2"><Calendar size={13} className="text-accent flex-shrink-0" /> {staff.working_days} · {staff.working_hours}</span>
         <span className="flex items-center gap-2"><Globe size={13} className="text-nerd-orange flex-shrink-0" /> {staff.languages}</span>
         <span className="flex items-center gap-2"><Star size={13} className="text-nerd-orange flex-shrink-0" /> {staff.experience_years} ปี</span>
-        <span className="flex items-center gap-2"><ClipboardList size={13} className="text-nerd-blue flex-shrink-0" /> {staff.cases_per_day} เคส/วัน</span>
+        <span className="flex items-center gap-2"><ClipboardList size={13} className="text-accent flex-shrink-0" /> {staff.cases_per_day} เคส/วัน</span>
       </div>
     </div>
   );
@@ -181,7 +181,7 @@ const HeroSection = ({ serviceCount, faqCount, staffCount }: { serviceCount: num
     <div className="relative z-10 flex items-end justify-between gap-6 px-8 pt-10" style={{ minHeight: 260 }}>
       <div className="flex-1 max-w-xl pb-10">
         <div
-          className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 border animate-fade-in font-poppins"
+          className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 border animate-fade-in"
           style={{ background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.85)' }}
         >
           <span className="w-2 h-2 rounded-full animate-pulse-soft" style={{ background: '#f7991a' }} />
@@ -189,14 +189,14 @@ const HeroSection = ({ serviceCount, faqCount, staffCount }: { serviceCount: num
         </div>
 
         <h1
-          className="font-black text-3xl md:text-4xl leading-tight mb-4 text-white animate-fade-in font-poppins"
+          className="font-black text-3xl md:text-4xl leading-tight mb-4 text-white animate-fade-in font-display"
           style={{ animationDelay: '80ms' }}
         >
           Clinic<br />
           <span style={{ color: '#6b82c4' }}>Knowledge Base</span>
         </h1>
 
-        <p className="text-sm leading-relaxed mb-7 max-w-md animate-fade-in font-poppins" style={{ color: 'rgba(255,255,255,0.55)', animationDelay: '160ms' }}>
+        <p className="text-sm leading-relaxed mb-7 max-w-md animate-fade-in" style={{ color: 'rgba(255,255,255,0.55)', animationDelay: '160ms' }}>
           ข้อมูลบริการ คำถามที่พบบ่อย และทีมแพทย์ — ครบทุกอย่างในที่เดียว
         </p>
 
@@ -259,7 +259,7 @@ const Knowledge = () => {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f5f6f8' }}>
+    <div className="min-h-screen bg-background">
       <Header />
       <main className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-20 py-10">
         <HeroSection
@@ -270,22 +270,22 @@ const Knowledge = () => {
 
         {/* ── Tabs ── */}
         <Tabs defaultValue="services" className="w-full">
-          <TabsList className="w-full bg-white border border-border mb-8 h-14 p-1.5 rounded-2xl shadow-sm">
+          <TabsList className="w-full bg-card border border-border mb-8 h-14 p-1.5 rounded-2xl shadow-sm">
             <TabsTrigger
               value="services"
-              className="flex-1 text-sm font-semibold rounded-xl font-poppins data-[state=active]:bg-nerd-blue data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
             >
               💉 บริการ
             </TabsTrigger>
             <TabsTrigger
               value="faq"
-              className="flex-1 text-sm font-semibold rounded-xl font-poppins data-[state=active]:bg-nerd-blue data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
             >
               ❓ FAQ
             </TabsTrigger>
             <TabsTrigger
               value="staff"
-              className="flex-1 text-sm font-semibold rounded-xl font-poppins data-[state=active]:bg-nerd-blue data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
             >
               👩‍⚕️ ทีมแพทย์
             </TabsTrigger>
@@ -295,13 +295,13 @@ const Knowledge = () => {
           <TabsContent value="services">
             <SearchInput value={serviceSearch} onChange={setServiceSearch} placeholder="ค้นหาบริการ..." />
             <FilterPills categories={serviceCategories} active={serviceCategory} onChange={setServiceCategory} />
-            <p className="text-muted-foreground text-xs mb-5 font-poppins">
+            <p className="text-muted-foreground text-xs mb-5">
               แสดง {filteredServices.length} จาก {services?.length ?? 0} บริการ
             </p>
 
             {filteredServices.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-border p-12 text-center shadow-sm">
-                <p className="text-muted-foreground text-sm font-poppins">ไม่พบบริการที่ค้นหา 🔍</p>
+              <div className="bg-card rounded-2xl border border-border p-12 text-center shadow-sm">
+                <p className="text-muted-foreground text-sm">ไม่พบบริการที่ค้นหา 🔍</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -316,28 +316,28 @@ const Knowledge = () => {
             <FilterPills categories={faqCategories} active={faqCategory} onChange={setFaqCategory} />
 
             {filteredFaqs.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-border p-12 text-center shadow-sm">
-                <p className="text-muted-foreground text-sm font-poppins">ไม่พบคำถามที่ค้นหา 🔍</p>
+              <div className="bg-card rounded-2xl border border-border p-12 text-center shadow-sm">
+                <p className="text-muted-foreground text-sm">ไม่พบคำถามที่ค้นหา 🔍</p>
               </div>
             ) : (
               <Accordion type="single" collapsible className="w-full space-y-3">
                 {filteredFaqs.map(f => (
                   <AccordionItem key={f.id} value={f.id} className="border-none">
-                    <AccordionTrigger className="bg-white border border-border rounded-2xl px-5 py-4 hover:border-nerd-blue/30 hover:shadow-sm hover:no-underline text-left gap-3 shadow-sm [&[data-state=open]]:rounded-b-none [&[data-state=open]]:border-nerd-blue/30 transition-all">
+                    <AccordionTrigger className="bg-card border border-border rounded-2xl px-5 py-4 hover:border-accent/30 hover:shadow-sm hover:no-underline text-left gap-3 shadow-sm [&[data-state=open]]:rounded-b-none [&[data-state=open]]:border-accent/30 transition-all">
                       <div className="flex items-center gap-2.5 flex-1 min-w-0">
-                        <span className={cn('text-[10px] font-semibold px-2.5 py-1 rounded-full flex-shrink-0 border font-poppins', getFaqBadge(f.category))}>
+                        <span className={cn('text-[10px] font-semibold px-2.5 py-1 rounded-full flex-shrink-0 border', getFaqBadge(f.category))}>
                           {f.category}
                         </span>
                         <span className="text-muted-foreground text-[10px] font-mono flex-shrink-0">{f.faq_code}</span>
-                        <span className="text-nerd-navy text-sm font-medium truncate font-poppins">{f.question}</span>
+                        <span className="text-foreground text-sm font-medium truncate">{f.question}</span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="bg-nerd-cloud/30 border border-t-0 border-border rounded-b-2xl px-5 py-4">
-                      <p className="text-foreground/80 text-sm leading-relaxed mb-3 font-poppins">
-                        <span className="text-nerd-blue font-semibold">คำตอบ: </span>{f.answer}
+                    <AccordionContent className="bg-muted/50 border border-t-0 border-border rounded-b-2xl px-5 py-4">
+                      <p className="text-foreground/80 text-sm leading-relaxed mb-3">
+                        <span className="text-accent font-semibold">คำตอบ: </span>{f.answer}
                       </p>
                       {f.related_services && (
-                        <p className="text-muted-foreground text-xs font-poppins">🔗 {f.related_services}</p>
+                        <p className="text-muted-foreground text-xs">🔗 {f.related_services}</p>
                       )}
                     </AccordionContent>
                   </AccordionItem>
@@ -349,8 +349,8 @@ const Knowledge = () => {
           {/* ── TAB 3: Staff ── */}
           <TabsContent value="staff">
             {!staff || staff.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-border p-12 text-center shadow-sm">
-                <p className="text-muted-foreground text-sm font-poppins">ไม่พบข้อมูลบุคลากร 👩‍⚕️</p>
+              <div className="bg-card rounded-2xl border border-border p-12 text-center shadow-sm">
+                <p className="text-muted-foreground text-sm">ไม่พบข้อมูลบุคลากร 👩‍⚕️</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
