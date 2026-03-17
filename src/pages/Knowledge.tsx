@@ -292,19 +292,19 @@ const Knowledge = () => {
           <TabsList className="w-full bg-card border border-border mb-8 h-14 p-1.5 rounded-2xl shadow-sm">
             <TabsTrigger
               value="services"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
             >
               💉 บริการ
             </TabsTrigger>
             <TabsTrigger
               value="faq"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
             >
               ❓ FAQ
             </TabsTrigger>
             <TabsTrigger
               value="staff"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
             >
               👩‍⚕️ ทีมแพทย์
             </TabsTrigger>
