@@ -140,7 +140,7 @@ const ServiceCard = ({ service }: { service: ClinicService }) => (
     <div className="h-px bg-border mb-3" />
 
     <div className="flex flex-col gap-1.5 text-xs mt-auto">
-      <span className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5 text-[13px]">
+      <span className="text-emerald-600 font-bold flex items-center gap-1.5 text-[13px]">
         <BadgeDollarSign size={14} /> {service.price_min} – {service.price_max} บาท
       </span>
       <span className="text-muted-foreground flex items-center gap-1.5"><Sparkles size={12} className="text-nerd-orange" /> {service.expected_result}</span>
