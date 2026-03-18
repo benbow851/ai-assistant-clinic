@@ -21,21 +21,21 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-nerd-navy shadow-lg">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-xl border-b border-white/[0.06]" style={{ background: 'rgba(15, 25, 35, 0.85)' }}>
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <Logo />
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-0.5">
           {navLinks.map(link => (
             <Link
               key={link.to}
               to={link.to}
               className={cn(
-                "px-4 py-2 rounded-md text-sm font-semibold transition-all duration-200",
+                "px-3.5 py-2 rounded-xl text-[13px] font-semibold transition-all duration-200 font-poppins",
                 location.pathname === link.to
-                  ? "bg-nerd-blue text-white"
-                  : "text-nerd-cloud hover:text-white hover:bg-white/10"
+                  ? "bg-nerd-blue/20 text-white border border-nerd-blue/30 shadow-sm shadow-nerd-blue/10"
+                  : "text-white/45 hover:text-white/80 hover:bg-white/[0.06] border border-transparent"
               )}
             >
               {link.label}
@@ -46,7 +46,7 @@ const Header = () => {
         {/* Mobile Hamburger */}
         <div className="md:hidden flex items-center gap-1">
           <button
-            className="text-nerd-cloud hover:text-white p-2"
+            className="text-white/50 hover:text-white p-2 rounded-xl hover:bg-white/[0.06] transition-all"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -57,17 +57,17 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-nerd-navy border-t border-white/10 px-4 pb-4">
+        <div className="md:hidden border-t border-white/[0.06] px-4 pb-4 pt-2" style={{ background: 'rgba(15, 25, 35, 0.95)' }}>
           {navLinks.map(link => (
             <Link
               key={link.to}
               to={link.to}
               onClick={() => setMenuOpen(false)}
               className={cn(
-                "block px-4 py-3 rounded-md text-sm font-semibold transition-all duration-200 mb-1",
+                "block px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 mb-1 font-poppins",
                 location.pathname === link.to
-                  ? "bg-nerd-blue text-white"
-                  : "text-nerd-cloud hover:text-white hover:bg-white/10"
+                  ? "bg-nerd-blue/20 text-white border border-nerd-blue/30"
+                  : "text-white/45 hover:text-white/80 hover:bg-white/[0.06] border border-transparent"
               )}
             >
               {link.label}
