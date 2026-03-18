@@ -99,6 +99,8 @@ export default {
 				'sans': ['Google Sans', 'Product Sans', 'system-ui', 'sans-serif'],
 				'display': ['Google Sans Display', 'Google Sans', 'system-ui', 'sans-serif'],
 				'google': ['Google Sans', 'Product Sans', 'sans-serif'],
+				'retro': ['"Press Start 2P"', 'cursive'],
+				'poppins': ['Poppins', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {
