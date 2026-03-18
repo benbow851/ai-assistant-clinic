@@ -185,8 +185,18 @@ const Appointments = () => {
     updateStatus.mutate({ id, status });
   };
 
-  if (isLoading) {
-    return <LoadingState onSignOut={() => {}} />;
+  if (isLoading && !error) {
+    return (
+      <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0f1923 0%, #162033 100%)' }}>
+        <Header />
+        <div className="flex justify-center items-center h-64">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-8 h-8 border-4 border-nerd-blue border-t-transparent rounded-full animate-spin" />
+            <p className="text-white/50 text-sm font-poppins">กำลังโหลดนัดหมาย...</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // Filter categories
