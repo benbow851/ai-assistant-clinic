@@ -20,7 +20,7 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import type { Appointment, AppointmentStatus } from '@/types/clinic';
-import brandAmbassador from '@/assets/brand-ambassador.png';
+import nerdLogo from '@/assets/nerdoptimize-logo.png';
 
 // ── Status badge config ──
 const statusConfig: Record<AppointmentStatus, { label: string; className: string }> = {

@@ -7,7 +7,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/
 import { useClinicServices, useClinicFaq, useClinicStaff, ClinicService, ClinicFaq, ClinicStaff } from '@/hooks/use-knowledge';
 import { cn } from '@/lib/utils';
 import { Search, Zap, HelpCircle, Users, Clock, User, Sparkles, RefreshCw, BadgeDollarSign, Target, Calendar, Globe, Star, ClipboardList } from 'lucide-react';
-import brandAmbassador from '@/assets/brand-ambassador.png';
+import nerdLogo from '@/assets/nerdoptimize-logo.png';
 
 // ── Category badge color map ──
 const serviceCategoryColors: Record<string, string> = {

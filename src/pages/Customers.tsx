@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Customer, MembershipStatus } from '@/types/clinic';
-import brandAmbassador from '@/assets/brand-ambassador.png';
+import nerdLogo from '@/assets/nerdoptimize-logo.png';
 import { useNavigate } from 'react-router-dom';
 
 // ── Membership avatar color ──
