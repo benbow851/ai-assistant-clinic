@@ -12,7 +12,6 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { to: '/', label: 'News' },
     { to: '/webhooks', label: 'Webhooks' },
     { to: '/chat-editor', label: 'Chat Editor' },
     { to: '/credentials', label: '🔐 Credentials' },
