@@ -138,7 +138,7 @@ const AppointmentMobileCard = ({
 
 // ── Main Page ──
 const Appointments = () => {
-  const { appointments, isLoading } = useAppointments();
+  const { appointments, isLoading, error } = useAppointments();
   const updateStatus = useUpdateAppointmentStatus();
   const isMobile = useIsMobile();
 
