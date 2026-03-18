@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import ChatDialog from './chat/ChatDialog';
 import { useChatMessages } from './chat/useChatMessages';
-import brandAmbassador from '@/assets/brand-ambassador.png';
+import nerdLogo from '@/assets/nerdoptimize-logo.png';
 
 const ChatButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ const ChatButton = () => {
         )}
       >
         <img
-          src={brandAmbassador}
+          src={nerdLogo}
           alt="Chat with NerdOptimize"
           className="w-[90px] h-[90px] object-contain drop-shadow-xl hover:scale-105 transition-transform duration-200"
         />

@@ -2,13 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;900&family=Google+Sans+Display:wght@400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Product+Sans:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;500;600;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import './base.css';
 @import './components.css';
 @import './chat.css';
 @import './animations.css';
 @import './bulletpoints.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
