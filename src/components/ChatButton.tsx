@@ -20,7 +20,7 @@ const ChatButton = () => {
         )}
       >
         <img
-          src={brandAmbassador}
+          src={nerdLogo}
           alt="Chat with NerdOptimize"
           className="w-[90px] h-[90px] object-contain drop-shadow-xl hover:scale-105 transition-transform duration-200"
         />
