@@ -10,6 +10,8 @@ import Webhooks from "./pages/Webhooks";
 import ChatEditor from "./pages/ChatEditor";
 import Credentials from "./pages/Credentials";
 import Knowledge from "./pages/Knowledge";
+import Customers from "./pages/Customers";
+import Appointments from "./pages/Appointments";
 import ChatButton from "./components/ChatButton";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => (
         <Route path="/chat-editor" element={<ChatEditor />} />
         <Route path="/credentials" element={<Credentials />} />
         <Route path="/knowledge" element={<Knowledge />} />
+        <Route path="/customers" element={<Customers />} />
+        <Route path="/appointments" element={<Appointments />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
