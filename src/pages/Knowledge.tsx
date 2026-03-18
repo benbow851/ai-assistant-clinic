@@ -11,51 +11,51 @@ import nerdLogo from '@/assets/nerdoptimize-logo.png';
 
 // ── Category badge color map ──
 const serviceCategoryColors: Record<string, string> = {
-  Botox: 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
-  Filler: 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
-  Laser: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
-  'Skin Tightening': 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
-  'Vitamin Drip': 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
-  Facial: 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
-  Hair: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
-  Body: 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
-  Package: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
-  'Acne & Scar': 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
-  'Thread Lift': 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
-  Consultation: 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
-  'Check-up': 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
+  Botox: 'bg-[#4d62a7]/25 text-[#8da0d6] border-[#4d62a7]/30',
+  Filler: 'bg-[#bf415c]/25 text-[#e08a9d] border-[#bf415c]/30',
+  Laser: 'bg-[#f7991a]/25 text-[#f7b960] border-[#f7991a]/30',
+  'Skin Tightening': 'bg-[#4d62a7]/25 text-[#8da0d6] border-[#4d62a7]/30',
+  'Vitamin Drip': 'bg-[#add099]/25 text-[#add099] border-[#add099]/30',
+  Facial: 'bg-[#bf415c]/25 text-[#e08a9d] border-[#bf415c]/30',
+  Hair: 'bg-[#f7991a]/25 text-[#f7b960] border-[#f7991a]/30',
+  Body: 'bg-[#4d62a7]/25 text-[#8da0d6] border-[#4d62a7]/30',
+  Package: 'bg-[#f7991a]/25 text-[#f7b960] border-[#f7991a]/30',
+  'Acne & Scar': 'bg-[#bf415c]/25 text-[#e08a9d] border-[#bf415c]/30',
+  'Thread Lift': 'bg-[#4d62a7]/25 text-[#8da0d6] border-[#4d62a7]/30',
+  Consultation: 'bg-[#add099]/25 text-[#add099] border-[#add099]/30',
+  'Check-up': 'bg-[#add099]/25 text-[#add099] border-[#add099]/30',
 };
 const getCategoryBadge = (cat: string) =>
-  serviceCategoryColors[cat] || 'bg-muted text-muted-foreground border-border';
+  serviceCategoryColors[cat] || 'bg-white/10 text-white/50 border-white/10';
 
-// ── Card backgrounds per category – brand-aligned tints ──
+// ── Card backgrounds per category ──
 const serviceCategoryCardBg: Record<string, string> = {
-  Botox: 'bg-[#4d62a7]/[0.06] border-[#4d62a7]/15',
-  Filler: 'bg-[#bf415c]/[0.06] border-[#bf415c]/15',
-  Laser: 'bg-[#f7991a]/[0.06] border-[#f7991a]/15',
-  'Skin Tightening': 'bg-[#4d62a7]/[0.04] border-[#4d62a7]/12',
-  'Vitamin Drip': 'bg-[#add099]/[0.15] border-[#add099]/25',
-  Facial: 'bg-[#bf415c]/[0.04] border-[#bf415c]/12',
-  Hair: 'bg-[#f7991a]/[0.04] border-[#f7991a]/12',
-  Body: 'bg-[#4d62a7]/[0.08] border-[#4d62a7]/18',
-  Package: 'bg-[#f7991a]/[0.08] border-[#f7991a]/18',
-  'Acne & Scar': 'bg-[#bf415c]/[0.08] border-[#bf415c]/18',
+  Botox: 'bg-[#4d62a7]/[0.08] border-[#4d62a7]/20',
+  Filler: 'bg-[#bf415c]/[0.08] border-[#bf415c]/20',
+  Laser: 'bg-[#f7991a]/[0.08] border-[#f7991a]/20',
+  'Skin Tightening': 'bg-[#4d62a7]/[0.06] border-[#4d62a7]/15',
+  'Vitamin Drip': 'bg-[#add099]/[0.10] border-[#add099]/20',
+  Facial: 'bg-[#bf415c]/[0.06] border-[#bf415c]/15',
+  Hair: 'bg-[#f7991a]/[0.06] border-[#f7991a]/15',
+  Body: 'bg-[#4d62a7]/[0.08] border-[#4d62a7]/20',
+  Package: 'bg-[#f7991a]/[0.08] border-[#f7991a]/20',
+  'Acne & Scar': 'bg-[#bf415c]/[0.08] border-[#bf415c]/20',
   'Thread Lift': 'bg-[#4d62a7]/[0.06] border-[#4d62a7]/15',
-  Consultation: 'bg-[#add099]/[0.12] border-[#add099]/20',
-  'Check-up': 'bg-[#add099]/[0.12] border-[#add099]/20',
+  Consultation: 'bg-[#add099]/[0.08] border-[#add099]/15',
+  'Check-up': 'bg-[#add099]/[0.08] border-[#add099]/15',
 };
 const getCategoryCardBg = (cat: string) =>
-  serviceCategoryCardBg[cat] || 'bg-card border-border';
+  serviceCategoryCardBg[cat] || 'bg-white/5 border-white/10';
 
 const faqCategoryColors: Record<string, string> = {
-  'การจอง': 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
-  Botox: 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
-  Filler: 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
-  Laser: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/20',
-  'ทั่วไป': 'bg-muted text-muted-foreground border-border',
-  'ราคา': 'bg-[#add099]/30 text-[#4a7a3a] border-[#add099]/30',
+  'การจอง': 'bg-[#4d62a7]/25 text-[#8da0d6] border-[#4d62a7]/30',
+  Botox: 'bg-[#4d62a7]/25 text-[#8da0d6] border-[#4d62a7]/30',
+  Filler: 'bg-[#bf415c]/25 text-[#e08a9d] border-[#bf415c]/30',
+  Laser: 'bg-[#f7991a]/25 text-[#f7b960] border-[#f7991a]/30',
+  'ทั่วไป': 'bg-white/10 text-white/50 border-white/15',
+  'ราคา': 'bg-[#add099]/25 text-[#add099] border-[#add099]/30',
 };
-const getFaqBadge = (cat: string) => faqCategoryColors[cat] || 'bg-muted text-muted-foreground border-border';
+const getFaqBadge = (cat: string) => faqCategoryColors[cat] || 'bg-white/10 text-white/50 border-white/15';
 
 // ── Avatar colors from brand palette ──
 const avatarColors = ['#4d62a7', '#bf415c', '#f7991a', '#add099', '#a14c46', '#1d252d'];
@@ -77,8 +77,8 @@ const StatPill = ({ icon: Icon, label, value }: { icon: React.ElementType; label
   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5 border border-white/15">
     <Icon size={15} className="text-nerd-orange flex-shrink-0" />
     <div>
-      <p className="text-white/60 text-[10px] font-medium uppercase tracking-wide leading-none mb-0.5">{label}</p>
-      <p className="text-white text-sm font-bold leading-none">{value}</p>
+      <p className="text-white/60 text-[10px] font-medium uppercase tracking-wide leading-none mb-0.5 font-poppins">{label}</p>
+      <p className="text-white text-sm font-bold leading-none font-poppins">{value}</p>
     </div>
   </div>
 );
@@ -86,13 +86,13 @@ const StatPill = ({ icon: Icon, label, value }: { icon: React.ElementType; label
 // ── Search Input ──
 const SearchInput = ({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder: string }) => (
   <div className="relative w-full mb-5">
-    <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+    <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
     <input
       type="text"
       value={value}
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all shadow-sm"
+      className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-nerd-blue/50 focus:ring-2 focus:ring-nerd-blue/10 transition-all font-poppins backdrop-blur-sm"
     />
   </div>
 );
@@ -105,10 +105,10 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
         key={cat}
         onClick={() => onChange(cat)}
         className={cn(
-          "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border",
+          "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border font-poppins",
           active === cat
-            ? 'bg-[#4d62a7] text-white border-[#4d62a7] shadow-md'
-            : 'bg-card text-foreground border-border hover:border-[#4d62a7]/40 hover:shadow-sm'
+            ? 'bg-nerd-blue text-white border-nerd-blue shadow-md shadow-nerd-blue/20'
+            : 'bg-white/5 text-white/50 border-white/10 hover:border-white/20 hover:text-white/70'
         )}
       >
         {cat}
@@ -119,32 +119,32 @@ const FilterPills = ({ categories, active, onChange }: { categories: string[]; a
 
 // ── Service Card ──
 const ServiceCard = ({ service }: { service: ClinicService }) => (
-  <div className={cn("rounded-2xl border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col", getCategoryCardBg(service.category))}>
+  <div className={cn("rounded-2xl border p-6 backdrop-blur-sm hover:bg-white/[0.08] hover:-translate-y-0.5 transition-all duration-300 flex flex-col", getCategoryCardBg(service.category))}>
     <div className="flex items-center justify-between gap-2 mb-3">
       <span className={cn('text-[11px] font-semibold px-2.5 py-1 rounded-full border', getCategoryBadge(service.category))}>
         {service.category}
       </span>
-      <span className="text-muted-foreground text-[11px] font-mono">{service.service_code}</span>
+      <span className="text-white/30 text-[11px] font-mono">{service.service_code}</span>
     </div>
 
-    <h3 className="text-foreground font-bold text-[15px] leading-snug mb-1.5">{service.name}</h3>
-    <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2 mb-4">{service.description}</p>
+    <h3 className="text-white font-bold text-[15px] leading-snug mb-1.5 font-poppins">{service.name}</h3>
+    <p className="text-white/50 text-xs leading-relaxed line-clamp-2 mb-4 font-poppins">{service.description}</p>
 
-    <div className="h-px bg-border mb-3" />
+    <div className="h-px bg-white/10 mb-3" />
 
-    <div className="flex flex-col gap-1.5 text-xs text-muted-foreground mb-3">
-      <span className="flex items-center gap-1.5"><Clock size={13} className="text-accent" /> {service.duration_minutes} นาที</span>
-      <span className="flex items-center gap-1.5"><User size={13} className="text-accent" /> {service.age_recommendation}</span>
+    <div className="flex flex-col gap-1.5 text-xs text-white/50 mb-3 font-poppins">
+      <span className="flex items-center gap-1.5"><Clock size={13} className="text-nerd-blue" /> {service.duration_minutes} นาที</span>
+      <span className="flex items-center gap-1.5"><User size={13} className="text-nerd-blue" /> {service.age_recommendation}</span>
     </div>
 
-    <div className="h-px bg-border mb-3" />
+    <div className="h-px bg-white/10 mb-3" />
 
-    <div className="flex flex-col gap-1.5 text-xs mt-auto">
-      <span className="text-emerald-600 font-bold flex items-center gap-1.5 text-[13px]">
+    <div className="flex flex-col gap-1.5 text-xs mt-auto font-poppins">
+      <span className="text-emerald-400 font-bold flex items-center gap-1.5 text-[13px]">
         <BadgeDollarSign size={14} /> {service.price_min} – {service.price_max} บาท
       </span>
-      <span className="text-muted-foreground flex items-center gap-1.5"><Sparkles size={12} className="text-nerd-orange" /> {service.expected_result}</span>
-      <span className="text-muted-foreground flex items-center gap-1.5"><RefreshCw size={12} className="text-accent" /> {service.recommended_sessions}</span>
+      <span className="text-white/50 flex items-center gap-1.5"><Sparkles size={12} className="text-nerd-orange" /> {service.expected_result}</span>
+      <span className="text-white/50 flex items-center gap-1.5"><RefreshCw size={12} className="text-nerd-blue" /> {service.recommended_sessions}</span>
     </div>
   </div>
 );
@@ -155,26 +155,26 @@ const StaffCard = ({ staff }: { staff: ClinicStaff }) => {
   const initial = staff.full_name.charAt(0);
 
   return (
-    <div className="bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center">
+    <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/[0.08] hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center">
       <div
-        className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold mb-3 shadow-md"
+        className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold mb-3 shadow-lg font-poppins"
         style={{ backgroundColor: color }}
       >
         {initial}
       </div>
-      <h3 className="text-foreground font-bold text-sm mb-1">{staff.full_name}</h3>
-      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/20 mb-4">
+      <h3 className="text-white font-bold text-sm mb-1 font-poppins">{staff.full_name}</h3>
+      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-nerd-blue/20 text-[#8da0d6] border border-nerd-blue/30 mb-4">
         {staff.position}
       </span>
 
-      <div className="h-px bg-border w-full mb-4" />
+      <div className="h-px bg-white/10 w-full mb-4" />
 
-      <div className="w-full flex flex-col gap-2 text-xs text-muted-foreground text-left">
+      <div className="w-full flex flex-col gap-2 text-xs text-white/50 text-left font-poppins">
         <span className="flex items-center gap-2"><Target size={13} className="text-nerd-pink flex-shrink-0" /> {staff.specialties}</span>
-        <span className="flex items-center gap-2"><Calendar size={13} className="text-accent flex-shrink-0" /> {staff.working_days} · {staff.working_hours}</span>
+        <span className="flex items-center gap-2"><Calendar size={13} className="text-nerd-blue flex-shrink-0" /> {staff.working_days} · {staff.working_hours}</span>
         <span className="flex items-center gap-2"><Globe size={13} className="text-nerd-orange flex-shrink-0" /> {staff.languages}</span>
         <span className="flex items-center gap-2"><Star size={13} className="text-nerd-orange flex-shrink-0" /> {staff.experience_years} ปี</span>
-        <span className="flex items-center gap-2"><ClipboardList size={13} className="text-accent flex-shrink-0" /> {staff.cases_per_day} เคส/วัน</span>
+        <span className="flex items-center gap-2"><ClipboardList size={13} className="text-nerd-blue flex-shrink-0" /> {staff.cases_per_day} เคส/วัน</span>
       </div>
     </div>
   );
@@ -207,15 +207,11 @@ const HeroSection = ({ serviceCount, faqCount, staffCount }: { serviceCount: num
           Knowledge Base
         </div>
 
-        <h1
-          className="font-black text-3xl md:text-4xl leading-tight mb-4 text-white animate-fade-in font-display"
-          style={{ animationDelay: '80ms' }}
-        >
-          Clinic<br />
-          <span style={{ color: '#6b82c4' }}>Knowledge Base</span>
+        <h1 className="font-retro text-lg md:text-xl leading-relaxed mb-4 text-white animate-fade-in" style={{ animationDelay: '80ms' }}>
+          Knowledge Base
         </h1>
 
-        <p className="text-sm leading-relaxed mb-7 max-w-md animate-fade-in" style={{ color: 'rgba(255,255,255,0.55)', animationDelay: '160ms' }}>
+        <p className="text-sm leading-relaxed mb-7 max-w-md animate-fade-in font-poppins" style={{ color: 'rgba(255,255,255,0.55)', animationDelay: '160ms' }}>
           ข้อมูลบริการ คำถามที่พบบ่อย และทีมแพทย์ — ครบทุกอย่างในที่เดียว
         </p>
 
@@ -226,7 +222,7 @@ const HeroSection = ({ serviceCount, faqCount, staffCount }: { serviceCount: num
         </div>
       </div>
 
-      <div className="hidden md:block flex-shrink-0 self-end animate-fade-in" style={{ animationDelay: '100ms' }}>
+      <div className="hidden md:block flex-shrink-0 self-end animate-fade-in pb-10" style={{ animationDelay: '100ms' }}>
         <img
           src={nerdLogo}
           alt="NerdOptimize"
@@ -274,13 +270,31 @@ const Knowledge = () => {
   const isLoading = sLoading || fLoading || stLoading;
 
   if (isLoading) {
-    return <LoadingState onSignOut={() => {}} />;
+    return (
+      <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0f1923 0%, #162033 100%)' }}>
+        <Header />
+        <div className="flex justify-center items-center h-64">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-8 h-8 border-4 border-nerd-blue border-t-transparent rounded-full animate-spin" />
+            <p className="text-white/50 text-sm font-poppins">กำลังโหลดข้อมูล...</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0f1923 0%, #162033 100%)' }}>
       <Header />
-      <main className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-20 py-10">
+      <main className="max-w-6xl mx-auto px-4 pt-8 pb-16">
+        {/* Live indicator */}
+        <div className="flex justify-end mb-4">
+          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-soft" />
+            🟢 Live
+          </div>
+        </div>
+
         <HeroSection
           serviceCount={services?.length ?? 0}
           faqCount={faqs?.length ?? 0}
@@ -289,22 +303,22 @@ const Knowledge = () => {
 
         {/* ── Tabs ── */}
         <Tabs defaultValue="services" className="w-full">
-          <TabsList className="w-full bg-card border border-border mb-8 h-14 p-1.5 rounded-2xl shadow-sm">
+          <TabsList className="w-full bg-white/5 border border-white/10 mb-8 h-14 p-1.5 rounded-2xl backdrop-blur-sm">
             <TabsTrigger
               value="services"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl text-white/50 data-[state=active]:bg-nerd-blue data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-nerd-blue/20 transition-all h-full font-poppins"
             >
               💉 บริการ
             </TabsTrigger>
             <TabsTrigger
               value="faq"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl text-white/50 data-[state=active]:bg-nerd-blue data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-nerd-blue/20 transition-all h-full font-poppins"
             >
               ❓ FAQ
             </TabsTrigger>
             <TabsTrigger
               value="staff"
-              className="flex-1 text-sm font-semibold rounded-xl data-[state=active]:bg-[#4d62a7] data-[state=active]:text-white data-[state=active]:shadow-md transition-all h-full"
+              className="flex-1 text-sm font-semibold rounded-xl text-white/50 data-[state=active]:bg-nerd-blue data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-nerd-blue/20 transition-all h-full font-poppins"
             >
               👩‍⚕️ ทีมแพทย์
             </TabsTrigger>
@@ -314,13 +328,13 @@ const Knowledge = () => {
           <TabsContent value="services">
             <SearchInput value={serviceSearch} onChange={setServiceSearch} placeholder="ค้นหาบริการ..." />
             <FilterPills categories={serviceCategories} active={serviceCategory} onChange={setServiceCategory} />
-            <p className="text-muted-foreground text-xs mb-5">
+            <p className="text-white/40 text-xs mb-5 font-poppins">
               แสดง {filteredServices.length} จาก {services?.length ?? 0} บริการ
             </p>
 
             {filteredServices.length === 0 ? (
-              <div className="bg-card rounded-2xl border border-border p-12 text-center shadow-sm">
-                <p className="text-muted-foreground text-sm">ไม่พบบริการที่ค้นหา 🔍</p>
+              <div className="bg-white/5 rounded-2xl border border-white/10 p-12 text-center backdrop-blur-sm">
+                <p className="text-white/40 text-sm font-poppins">ไม่พบบริการที่ค้นหา 🔍</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -335,28 +349,28 @@ const Knowledge = () => {
             <FilterPills categories={faqCategories} active={faqCategory} onChange={setFaqCategory} />
 
             {filteredFaqs.length === 0 ? (
-              <div className="bg-card rounded-2xl border border-border p-12 text-center shadow-sm">
-                <p className="text-muted-foreground text-sm">ไม่พบคำถามที่ค้นหา 🔍</p>
+              <div className="bg-white/5 rounded-2xl border border-white/10 p-12 text-center backdrop-blur-sm">
+                <p className="text-white/40 text-sm font-poppins">ไม่พบคำถามที่ค้นหา 🔍</p>
               </div>
             ) : (
               <Accordion type="single" collapsible className="w-full space-y-3">
                 {filteredFaqs.map(f => (
                   <AccordionItem key={f.id} value={f.id} className="border-none">
-                    <AccordionTrigger className="bg-card border border-border rounded-2xl px-5 py-4 hover:border-accent/30 hover:shadow-sm hover:no-underline text-left gap-3 shadow-sm [&[data-state=open]]:rounded-b-none [&[data-state=open]]:border-accent/30 transition-all">
+                    <AccordionTrigger className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 hover:bg-white/[0.08] hover:border-white/15 hover:no-underline text-left gap-3 backdrop-blur-sm [&[data-state=open]]:rounded-b-none [&[data-state=open]]:border-nerd-blue/30 transition-all">
                       <div className="flex items-center gap-2.5 flex-1 min-w-0">
                         <span className={cn('text-[10px] font-semibold px-2.5 py-1 rounded-full flex-shrink-0 border', getFaqBadge(f.category))}>
                           {f.category}
                         </span>
-                        <span className="text-muted-foreground text-[10px] font-mono flex-shrink-0">{f.faq_code}</span>
-                        <span className="text-foreground text-sm font-medium truncate">{f.question}</span>
+                        <span className="text-white/30 text-[10px] font-mono flex-shrink-0">{f.faq_code}</span>
+                        <span className="text-white text-sm font-medium truncate font-poppins">{f.question}</span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="bg-muted/50 border border-t-0 border-border rounded-b-2xl px-5 py-4">
-                      <p className="text-foreground/80 text-sm leading-relaxed mb-3">
-                        <span className="text-accent font-semibold">คำตอบ: </span>{f.answer}
+                    <AccordionContent className="bg-white/[0.03] border border-t-0 border-white/10 rounded-b-2xl px-5 py-4">
+                      <p className="text-white/70 text-sm leading-relaxed mb-3 font-poppins">
+                        <span className="text-nerd-blue font-semibold">คำตอบ: </span>{f.answer}
                       </p>
                       {f.related_services && (
-                        <p className="text-muted-foreground text-xs">🔗 {f.related_services}</p>
+                        <p className="text-white/40 text-xs font-poppins">🔗 {f.related_services}</p>
                       )}
                     </AccordionContent>
                   </AccordionItem>
@@ -368,8 +382,8 @@ const Knowledge = () => {
           {/* ── TAB 3: Staff ── */}
           <TabsContent value="staff">
             {!staff || staff.length === 0 ? (
-              <div className="bg-card rounded-2xl border border-border p-12 text-center shadow-sm">
-                <p className="text-muted-foreground text-sm">ไม่พบข้อมูลบุคลากร 👩‍⚕️</p>
+              <div className="bg-white/5 rounded-2xl border border-white/10 p-12 text-center backdrop-blur-sm">
+                <p className="text-white/40 text-sm font-poppins">ไม่พบข้อมูลบุคลากร 👩‍⚕️</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
