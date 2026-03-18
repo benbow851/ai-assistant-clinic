@@ -18,6 +18,7 @@ export function useCustomers() {
       return data ?? [];
     },
     staleTime: 5 * 60 * 1000,
+    retry: 1,
   });
 
   useEffect(() => {
