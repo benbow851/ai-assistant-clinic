@@ -227,7 +227,7 @@ const HeroSection = ({
 
 // ── Main Page ──
 const Customers = () => {
-  const { customers, isLoading } = useCustomers();
+  const { customers, isLoading, error } = useCustomers();
   const [search, setSearch] = useState('');
   const [membershipFilter, setMembershipFilter] = useState('All');
   const [addOpen, setAddOpen] = useState(false);
