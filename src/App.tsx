@@ -10,6 +10,8 @@ import Webhooks from "./pages/Webhooks";
 import ChatEditor from "./pages/ChatEditor";
 import Credentials from "./pages/Credentials";
 import Knowledge from "./pages/Knowledge";
+import Customers from "./pages/Customers";
+import Appointments from "./pages/Appointments";
 import ChatButton from "./components/ChatButton";
 
 const queryClient = new QueryClient();
