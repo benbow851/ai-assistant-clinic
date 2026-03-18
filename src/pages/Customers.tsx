@@ -1,42 +1,50 @@
 
 import React, { useState, useMemo } from 'react';
 import Header from '@/components/Header';
-import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { Search, Users, Crown, Star, UserCheck, Phone, Mail, Heart, ShieldAlert, Calendar, BadgeDollarSign } from 'lucide-react';
+import { useCustomers } from '@/hooks/use-customers';
+import AddCustomerDialog from '@/components/customers/AddCustomerDialog';
+import EditCustomerDialog from '@/components/customers/EditCustomerDialog';
+import LoadingState from '@/components/LoadingState';
+import {
+  Search, Users, Crown, Star, UserCheck, Phone, Mail, Heart,
+  ShieldAlert, BadgeDollarSign, Pencil, ArrowRight, Plus,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import type { Customer, MembershipStatus } from '@/types/clinic';
 import brandAmbassador from '@/assets/brand-ambassador.png';
+import { useNavigate } from 'react-router-dom';
 
-// ── Mock data ──
-const mockCustomers: Customer[] = [
-  { id: '1', customer_code: 'C-0001', full_name: 'สมศรี จันทร์เพ็ญ', date_of_birth: '1990-05-12', age: 35, gender: 'Female', phone: '081-234-5678', line_id: 'somsri_j', email: 'somsri@email.com', first_visit_date: '2023-01-15', total_visits: 12, favorite_services: 'Botox, Filler', total_purchase: 85000, membership_status: 'gold', allergies: null, notes: 'ลูกค้าประจำ', is_active: true, created_at: '2023-01-15', updated_at: '2024-12-01' },
-  { id: '2', customer_code: 'C-0002', full_name: 'วิชัย สุขสันต์', date_of_birth: '1985-08-20', age: 40, gender: 'Male', phone: '089-876-5432', line_id: 'wichai_s', email: 'wichai@email.com', first_visit_date: '2022-06-10', total_visits: 28, favorite_services: 'Laser, Vitamin Drip', total_purchase: 220000, membership_status: 'diamond', allergies: 'Lidocaine', notes: null, is_active: true, created_at: '2022-06-10', updated_at: '2024-11-20' },
-  { id: '3', customer_code: 'C-0003', full_name: 'พิมพ์ใจ รักสวย', date_of_birth: '1995-03-08', age: 30, gender: 'Female', phone: '062-111-2233', line_id: null, email: 'pimjai@email.com', first_visit_date: '2024-03-01', total_visits: 3, favorite_services: 'Facial', total_purchase: 12000, membership_status: 'new', allergies: null, notes: 'สนใจ Thread Lift', is_active: true, created_at: '2024-03-01', updated_at: '2024-10-15' },
-  { id: '4', customer_code: 'C-0004', full_name: 'อรทัย ใจดี', date_of_birth: '1988-11-25', age: 37, gender: 'Female', phone: '091-555-6677', line_id: 'orathai_j', email: null, first_visit_date: '2023-07-20', total_visits: 8, favorite_services: 'Botox, Skin Tightening', total_purchase: 54000, membership_status: 'silver', allergies: 'Aspirin', notes: null, is_active: true, created_at: '2023-07-20', updated_at: '2024-09-30' },
-  { id: '5', customer_code: 'C-0005', full_name: 'ธนพล มั่งมี', date_of_birth: '1992-01-14', age: 33, gender: 'Male', phone: '085-999-0011', line_id: 'thanapol_m', email: 'thanapol@email.com', first_visit_date: '2024-08-05', total_visits: 2, favorite_services: 'Hair', total_purchase: 8500, membership_status: 'new', allergies: null, notes: null, is_active: false, created_at: '2024-08-05', updated_at: '2024-08-10' },
-  { id: '6', customer_code: 'C-0006', full_name: 'นภัสสร แสงทอง', date_of_birth: '1993-07-30', age: 32, gender: 'Female', phone: '063-444-5566', line_id: 'napatsorn', email: 'napatsorn@email.com', first_visit_date: '2023-04-12', total_visits: 15, favorite_services: 'Filler, Laser, Facial', total_purchase: 120000, membership_status: 'gold', allergies: null, notes: 'แนะนำเพื่อนมาแล้ว 3 คน', is_active: true, created_at: '2023-04-12', updated_at: '2024-12-05' },
+// ── Membership avatar color ──
+const membershipAvatarColor: Record<MembershipStatus, string> = {
+  diamond: '#a855f7',
+  gold: '#eab308',
+  silver: '#9ca3af',
+  new: '#3b82f6',
+};
+
+// ── Membership badges ──
+const membershipBadge: Record<MembershipStatus, { label: string; className: string }> = {
+  diamond: { label: '💎 Diamond', className: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
+  gold: { label: '🥇 Gold', className: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' },
+  silver: { label: '🥈 Silver', className: 'bg-gray-500/20 text-gray-300 border-gray-500/30' },
+  new: { label: '🆕 New', className: 'bg-blue-500/20 text-blue-300 border-blue-500/30' },
+};
+
+// ── Filter pill categories ──
+const filterCategories = [
+  { key: 'All', label: 'All' },
+  { key: 'new', label: '🆕 New' },
+  { key: 'silver', label: '🥈 Silver' },
+  { key: 'gold', label: '🥇 Gold' },
+  { key: 'diamond', label: '💎 Diamond' },
 ];
 
-// ── Membership badge styling ──
-const membershipStyles: Record<MembershipStatus, string> = {
-  new: 'bg-[#4d62a7]/15 text-[#3a4d8a] border-[#4d62a7]/20',
-  silver: 'bg-[#dfe6ef] text-[#4d62a7] border-[#4d62a7]/20',
-  gold: 'bg-[#f7991a]/15 text-[#c47a14] border-[#f7991a]/25',
-  diamond: 'bg-[#bf415c]/15 text-[#a03550] border-[#bf415c]/20',
-};
-const membershipIcon: Record<MembershipStatus, React.ElementType> = {
-  new: UserCheck,
-  silver: Star,
-  gold: Crown,
-  diamond: Crown,
-};
-
-// ── Avatar colors from brand palette ──
-const avatarColors = ['#4d62a7', '#bf415c', '#f7991a', '#add099', '#a14c46', '#1d252d'];
-const getAvatarColor = (code: string) => {
-  let hash = 0;
-  for (let i = 0; i < code.length; i++) hash = code.charCodeAt(i) + ((hash << 5) - hash);
-  return avatarColors[Math.abs(hash) % avatarColors.length];
+// ── Format currency ──
+const formatPurchase = (n: number) => {
+  if (n >= 1_000_000) return `฿${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `฿${(n / 1_000).toFixed(0)}K`;
+  return `฿${n.toLocaleString()}`;
 };
 
 // ── Stat Pill ──
@@ -44,130 +52,130 @@ const StatPill = ({ icon: Icon, label, value }: { icon: React.ElementType; label
   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2.5 border border-white/15">
     <Icon size={15} className="text-nerd-orange flex-shrink-0" />
     <div>
-      <p className="text-white/60 text-[10px] font-medium uppercase tracking-wide leading-none mb-0.5">{label}</p>
-      <p className="text-white text-sm font-bold leading-none">{value}</p>
+      <p className="text-white/60 text-[10px] font-medium uppercase tracking-wide leading-none mb-0.5 font-poppins">{label}</p>
+      <p className="text-white text-sm font-bold leading-none font-poppins">{value}</p>
     </div>
   </div>
 );
 
-// ── Search Input ──
-const SearchInput = ({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder: string }) => (
-  <div className="relative w-full mb-5">
-    <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-    <input
-      type="text"
-      value={value}
-      onChange={e => onChange(e.target.value)}
-      placeholder={placeholder}
-      className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all shadow-sm"
-    />
-  </div>
-);
-
-// ── Filter Pills ──
-const FilterPills = ({ categories, active, onChange }: { categories: string[]; active: string; onChange: (c: string) => void }) => (
-  <div className="flex gap-2 overflow-x-auto pb-4 mb-2 scrollbar-hide">
-    {categories.map(cat => (
-      <button
-        key={cat}
-        onClick={() => onChange(cat)}
-        className={cn(
-          "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border",
-          active === cat
-            ? 'bg-[#4d62a7] text-white border-[#4d62a7] shadow-md'
-            : 'bg-card text-foreground border-border hover:border-[#4d62a7]/40 hover:shadow-sm'
-        )}
-      >
-        {cat}
-      </button>
-    ))}
-  </div>
-);
-
 // ── Customer Card ──
-const CustomerCard = ({ customer }: { customer: Customer }) => {
-  const color = getAvatarColor(customer.customer_code);
-  const initial = customer.full_name.charAt(0);
-  const MemberIcon = membershipIcon[customer.membership_status];
+const CustomerCard = ({
+  customer,
+  onEdit,
+}: {
+  customer: Customer;
+  onEdit: (c: Customer) => void;
+}) => {
+  const navigate = useNavigate();
+  const badge = membershipBadge[customer.membership_status];
+  const avatarBg = membershipAvatarColor[customer.membership_status];
+  const initials = customer.full_name
+    .split(' ')
+    .map(w => w.charAt(0))
+    .join('')
+    .slice(0, 2);
 
   return (
-    <div className="bg-card rounded-2xl border border-border p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-      <div className="flex items-start gap-4">
-        {/* Avatar */}
-        <div
-          className="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold flex-shrink-0 shadow-md"
-          style={{ background: color }}
+    <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 flex flex-col items-center text-center hover:bg-white/[0.08] hover:border-white/15 transition-all duration-300 group">
+      {/* Avatar */}
+      <div
+        className="w-14 h-14 rounded-full flex items-center justify-center text-white text-lg font-bold mb-3 shadow-lg font-poppins"
+        style={{ background: avatarBg }}
+      >
+        {initials}
+      </div>
+
+      {/* Name */}
+      <h3 className="text-white font-bold text-sm mb-1.5 font-poppins">{customer.full_name}</h3>
+
+      {/* Badge + code */}
+      <div className="flex items-center gap-2 mb-3">
+        <span className={cn('text-[10px] font-semibold px-2.5 py-0.5 rounded-full border', badge.className)}>
+          {badge.label}
+        </span>
+        <span className="text-white/30 text-[10px] font-mono">{customer.customer_code}</span>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-white/10 w-full mb-3" />
+
+      {/* Contact */}
+      <div className="w-full flex flex-col gap-1.5 text-xs text-white/50 mb-3 font-poppins">
+        {customer.phone && (
+          <span className="flex items-center gap-1.5 justify-center">
+            <Phone size={12} className="text-nerd-blue" /> {customer.phone}
+          </span>
+        )}
+        {customer.line_id && (
+          <span className="flex items-center gap-1.5 justify-center">
+            💬 {customer.line_id}
+          </span>
+        )}
+        {customer.email && (
+          <span className="flex items-center gap-1.5 justify-center truncate max-w-full">
+            <Mail size={12} className="text-nerd-blue" /> {customer.email}
+          </span>
+        )}
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-white/10 w-full mb-3" />
+
+      {/* Stats */}
+      <div className="w-full flex flex-col gap-1.5 text-xs font-poppins mb-3">
+        <span className="flex items-center gap-1.5 justify-center text-white/50">
+          🏥 {customer.total_visits} ครั้ง
+        </span>
+        <span className="flex items-center gap-1.5 justify-center text-emerald-400 font-bold">
+          <BadgeDollarSign size={13} /> {customer.total_purchase.toLocaleString()} ฿
+        </span>
+        {customer.allergies && customer.allergies !== '-' && (
+          <span className="flex items-center gap-1.5 justify-center text-amber-400">
+            <ShieldAlert size={12} /> {customer.allergies}
+          </span>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="flex items-center gap-2 w-full mt-auto">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="flex-1 text-white/50 hover:text-white hover:bg-white/10 text-xs gap-1 font-poppins"
+          onClick={() => onEdit(customer)}
         >
-          {initial}
-        </div>
-
-        <div className="flex-1 min-w-0">
-          {/* Header row */}
-          <div className="flex items-center justify-between gap-2 mb-1">
-            <h3 className="text-foreground font-bold text-sm truncate">{customer.full_name}</h3>
-            <span className={cn('text-[10px] font-semibold px-2.5 py-1 rounded-full border flex items-center gap-1 flex-shrink-0', membershipStyles[customer.membership_status])}>
-              <MemberIcon size={11} />
-              {customer.membership_status.charAt(0).toUpperCase() + customer.membership_status.slice(1)}
-            </span>
-          </div>
-
-          <p className="text-muted-foreground text-[11px] font-mono mb-3">{customer.customer_code}</p>
-
-          {/* Contact info */}
-          <div className="flex flex-col gap-1.5 text-xs text-muted-foreground mb-3">
-            {customer.phone && (
-              <span className="flex items-center gap-1.5"><Phone size={12} className="text-accent" /> {customer.phone}</span>
-            )}
-            {customer.email && (
-              <span className="flex items-center gap-1.5 truncate"><Mail size={12} className="text-accent" /> {customer.email}</span>
-            )}
-            {customer.favorite_services && (
-              <span className="flex items-center gap-1.5"><Heart size={12} className="text-nerd-pink" /> {customer.favorite_services}</span>
-            )}
-          </div>
-
-          <div className="h-px bg-border mb-3" />
-
-          {/* Stats row */}
-          <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1 text-muted-foreground">
-              <Calendar size={12} className="text-accent" /> {customer.total_visits} visits
-            </span>
-            <span className="flex items-center gap-1 text-emerald-600 font-bold">
-              <BadgeDollarSign size={13} /> {customer.total_purchase.toLocaleString()} ฿
-            </span>
-          </div>
-
-          {/* Allergy warning */}
-          {customer.allergies && (
-            <div className="mt-2 flex items-center gap-1.5 text-[11px] text-nerd-pink font-medium bg-[#bf415c]/8 rounded-lg px-2.5 py-1.5 border border-[#bf415c]/15">
-              <ShieldAlert size={12} /> แพ้: {customer.allergies}
-            </div>
-          )}
-
-          {/* Inactive badge */}
-          {!customer.is_active && (
-            <div className="mt-2 inline-flex items-center text-[10px] font-semibold text-muted-foreground bg-muted rounded-full px-2.5 py-1 border border-border">
-              Inactive
-            </div>
-          )}
-        </div>
+          <Pencil size={12} /> แก้ไข
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="flex-1 text-nerd-blue hover:text-white hover:bg-nerd-blue/20 text-xs gap-1 font-poppins"
+          onClick={() => navigate('/appointments')}
+        >
+          ดูนัด <ArrowRight size={12} />
+        </Button>
       </div>
     </div>
   );
 };
 
-// ── Hero ──
-const HeroSection = ({ customerCount, activeCount, diamondCount }: { customerCount: number; activeCount: number; diamondCount: number }) => (
+// ── Hero Section ──
+const HeroSection = ({
+  customerCount, vipCount, newCount, totalPurchase, onAddClick,
+}: {
+  customerCount: number; vipCount: number; newCount: number; totalPurchase: number;
+  onAddClick: () => void;
+}) => (
   <div
-    className="relative rounded-3xl overflow-hidden mb-10"
-    style={{ background: 'linear-gradient(135deg, #1d252d 0%, #2a3a5c 50%, #4d62a7 100%)' }}
+    className="relative overflow-hidden rounded-3xl mb-10"
+    style={{ background: 'linear-gradient(135deg, #111921 0%, #1e2d50 55%, #151d28 100%)' }}
   >
     <div
-      className="absolute inset-0 opacity-[0.03] pointer-events-none"
+      className="absolute inset-0"
       style={{
-        backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'6\' height=\'6\' viewBox=\'0 0 6 6\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'1\' cy=\'1\' r=\'0.7\' fill=\'white\'/%3E%3C/svg%3E")',
-        backgroundSize: '12px 12px',
+        opacity: 0.04,
+        backgroundImage: `repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 1px, transparent 40px),
+                          repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 1px, transparent 40px)`,
       }}
     />
     <div className="absolute top-[-40px] right-[28%] w-72 h-72 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(77,98,167,0.18)' }} />
@@ -183,31 +191,34 @@ const HeroSection = ({ customerCount, activeCount, diamondCount }: { customerCou
           Customer Management
         </div>
 
-        <h1
-          className="font-black text-3xl md:text-4xl leading-tight mb-4 text-white animate-fade-in font-display"
-          style={{ animationDelay: '80ms' }}
-        >
-          ลูกค้า<br />
-          <span style={{ color: '#6b82c4' }}>Customers</span>
+        <h1 className="font-retro text-lg md:text-xl leading-relaxed mb-4 text-white animate-fade-in" style={{ animationDelay: '80ms' }}>
+          Customer Database
         </h1>
 
-        <p className="text-sm leading-relaxed mb-7 max-w-md animate-fade-in" style={{ color: 'rgba(255,255,255,0.55)', animationDelay: '160ms' }}>
-          จัดการข้อมูลลูกค้า สถานะสมาชิก และประวัติการใช้บริการ
+        <p className="text-sm leading-relaxed mb-7 max-w-md animate-fade-in font-poppins" style={{ color: 'rgba(255,255,255,0.55)', animationDelay: '160ms' }}>
+          ข้อมูลลูกค้าและประวัติการใช้บริการ
         </p>
 
         <div className="flex flex-wrap gap-2 animate-fade-in" style={{ animationDelay: '240ms' }}>
-          <StatPill icon={Users} label="ลูกค้าทั้งหมด" value={`${customerCount} คน`} />
-          <StatPill icon={UserCheck} label="Active" value={`${activeCount} คน`} />
-          <StatPill icon={Crown} label="Diamond" value={`${diamondCount} คน`} />
+          <StatPill icon={Users} label="ลูกค้าทั้งหมด" value={`${customerCount}`} />
+          <StatPill icon={Crown} label="VIP" value={`${vipCount}`} />
+          <StatPill icon={UserCheck} label="ลูกค้าใหม่" value={`${newCount}`} />
+          <StatPill icon={BadgeDollarSign} label="ยอดรวม" value={formatPurchase(totalPurchase)} />
         </div>
       </div>
 
-      <div className="hidden md:block flex-shrink-0 self-end animate-fade-in" style={{ animationDelay: '100ms' }}>
+      <div className="hidden md:flex flex-col items-end gap-4 self-end pb-10">
+        <Button
+          onClick={onAddClick}
+          className="bg-nerd-blue hover:bg-nerd-blue/80 text-white font-poppins font-semibold gap-2 shadow-lg"
+        >
+          <Plus size={16} /> เพิ่มลูกค้า
+        </Button>
         <img
           src={brandAmbassador}
           alt="NerdOptimize Brand Ambassador"
-          className="w-auto object-contain select-none"
-          style={{ height: 220, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))' }}
+          className="w-auto object-contain select-none animate-fade-in"
+          style={{ height: 180, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))', animationDelay: '100ms' }}
         />
       </div>
     </div>
@@ -216,55 +227,111 @@ const HeroSection = ({ customerCount, activeCount, diamondCount }: { customerCou
 
 // ── Main Page ──
 const Customers = () => {
+  const { customers, isLoading } = useCustomers();
   const [search, setSearch] = useState('');
   const [membershipFilter, setMembershipFilter] = useState('All');
-
-  const customers = mockCustomers;
+  const [addOpen, setAddOpen] = useState(false);
+  const [editCustomer, setEditCustomer] = useState<Customer | null>(null);
 
   const filtered = useMemo(() => {
     return customers.filter(c => {
+      const q = search.toLowerCase();
       const matchesSearch = !search ||
-        c.full_name.toLowerCase().includes(search.toLowerCase()) ||
-        c.customer_code.toLowerCase().includes(search.toLowerCase()) ||
-        (c.phone && c.phone.includes(search));
-      const matchesMembership = membershipFilter === 'All' || c.membership_status === membershipFilter.toLowerCase();
+        c.full_name.toLowerCase().includes(q) ||
+        (c.phone && c.phone.includes(q)) ||
+        (c.line_id && c.line_id.toLowerCase().includes(q)) ||
+        (c.email && c.email.toLowerCase().includes(q));
+      const matchesMembership = membershipFilter === 'All' || c.membership_status === membershipFilter;
       return matchesSearch && matchesMembership;
     });
   }, [customers, search, membershipFilter]);
 
-  const activeCount = customers.filter(c => c.is_active).length;
-  const diamondCount = customers.filter(c => c.membership_status === 'diamond').length;
+  const vipCount = customers.filter(c => c.membership_status === 'diamond' || c.membership_status === 'gold').length;
+  const newCount = customers.filter(c => c.membership_status === 'new').length;
+  const totalPurchase = customers.reduce((sum, c) => sum + c.total_purchase, 0);
+
+  if (isLoading) {
+    return <LoadingState onSignOut={() => {}} />;
+  }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0f1923 0%, #162033 100%)' }}>
       <Header />
-      <main className="max-w-5xl mx-auto px-4 pt-8 pb-16">
+      <main className="max-w-6xl mx-auto px-4 pt-8 pb-16">
+        {/* Live indicator */}
+        <div className="flex justify-end mb-4">
+          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-soft" />
+            🟢 Live
+          </div>
+        </div>
+
+        {/* Mobile add button */}
+        <div className="md:hidden flex justify-end mb-4">
+          <Button onClick={() => setAddOpen(true)} className="bg-nerd-blue hover:bg-nerd-blue/80 text-white font-poppins font-semibold gap-2">
+            <Plus size={16} /> เพิ่มลูกค้า
+          </Button>
+        </div>
+
         <HeroSection
           customerCount={customers.length}
-          activeCount={activeCount}
-          diamondCount={diamondCount}
+          vipCount={vipCount}
+          newCount={newCount}
+          totalPurchase={totalPurchase}
+          onAddClick={() => setAddOpen(true)}
         />
 
-        <SearchInput value={search} onChange={setSearch} placeholder="ค้นหาลูกค้า ชื่อ, รหัส, เบอร์โทร..." />
-        <FilterPills
-          categories={['All', 'New', 'Silver', 'Gold', 'Diamond']}
-          active={membershipFilter}
-          onChange={setMembershipFilter}
-        />
+        {/* Search */}
+        <div className="relative w-full mb-5">
+          <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
+          <input
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="ค้นหาชื่อ เบอร์ LINE..."
+            className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-nerd-blue/50 focus:ring-2 focus:ring-nerd-blue/10 transition-all font-poppins backdrop-blur-sm"
+          />
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Filter pills */}
+        <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
+          {filterCategories.map(cat => (
+            <button
+              key={cat.key}
+              onClick={() => setMembershipFilter(cat.key)}
+              className={cn(
+                "flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all border font-poppins",
+                membershipFilter === cat.key
+                  ? 'bg-nerd-blue text-white border-nerd-blue shadow-md shadow-nerd-blue/20'
+                  : 'bg-white/5 text-white/50 border-white/10 hover:border-white/20 hover:text-white/70'
+              )}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map(customer => (
-            <CustomerCard key={customer.id} customer={customer} />
+            <CustomerCard
+              key={customer.id}
+              customer={customer}
+              onEdit={setEditCustomer}
+            />
           ))}
         </div>
 
         {filtered.length === 0 && (
-          <div className="text-center py-16 text-muted-foreground">
+          <div className="text-center py-16 text-white/30">
             <Users size={40} className="mx-auto mb-3 opacity-30" />
-            <p className="text-sm">ไม่พบลูกค้าที่ตรงกับการค้นหา</p>
+            <p className="text-sm font-poppins">ไม่พบลูกค้าที่ตรงกับการค้นหา</p>
           </div>
         )}
       </main>
+
+      <AddCustomerDialog open={addOpen} onOpenChange={setAddOpen} />
+      <EditCustomerDialog open={!!editCustomer} onOpenChange={open => !open && setEditCustomer(null)} customer={editCustomer} />
     </div>
   );
 };
