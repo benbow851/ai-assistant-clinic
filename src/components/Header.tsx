@@ -17,6 +17,8 @@ const Header = () => {
     { to: '/chat-editor', label: 'Chat Editor' },
     { to: '/credentials', label: '🔐 Credentials' },
     { to: '/knowledge', label: '📚 Knowledge Base' },
+    { to: '/customers', label: '👥 Customers' },
+    { to: '/appointments', label: '📅 Appointments' },
   ];
 
   return (
