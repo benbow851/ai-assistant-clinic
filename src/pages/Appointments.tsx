@@ -265,7 +265,7 @@ const Appointments = () => {
               <Button onClick={() => setAddOpen(true)} className="bg-nerd-blue hover:bg-nerd-blue/80 text-white font-poppins font-semibold gap-2 shadow-lg">
                 <Plus size={16} /> จองนัดใหม่
               </Button>
-              <img src={brandAmbassador} alt="NerdOptimize Brand Ambassador" className="w-auto object-contain select-none animate-fade-in" style={{ height: 180, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))', animationDelay: '100ms' }} />
+              <img src={nerdLogo} alt="NerdOptimize" className="w-auto object-contain select-none animate-fade-in" style={{ height: 80, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))', animationDelay: '100ms' }} />
             </div>
           </div>
         </div>

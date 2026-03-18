@@ -228,10 +228,10 @@ const HeroSection = ({ serviceCount, faqCount, staffCount }: { serviceCount: num
 
       <div className="hidden md:block flex-shrink-0 self-end animate-fade-in" style={{ animationDelay: '100ms' }}>
         <img
-          src={brandAmbassador}
-          alt="NerdOptimize Brand Ambassador"
+          src={nerdLogo}
+          alt="NerdOptimize"
           className="w-auto object-contain select-none"
-          style={{ height: 220, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))' }}
+          style={{ height: 80, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))' }}
         />
       </div>
     </div>
