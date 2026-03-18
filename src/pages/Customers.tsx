@@ -227,7 +227,7 @@ const HeroSection = ({
 
 // ── Main Page ──
 const Customers = () => {
-  const { customers, isLoading } = useCustomers();
+  const { customers, isLoading, error } = useCustomers();
   const [search, setSearch] = useState('');
   const [membershipFilter, setMembershipFilter] = useState('All');
   const [addOpen, setAddOpen] = useState(false);
@@ -250,8 +250,18 @@ const Customers = () => {
   const newCount = customers.filter(c => c.membership_status === 'new').length;
   const totalPurchase = customers.reduce((sum, c) => sum + c.total_purchase, 0);
 
-  if (isLoading) {
-    return <LoadingState onSignOut={() => {}} />;
+  if (isLoading && !error) {
+    return (
+      <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0f1923 0%, #162033 100%)' }}>
+        <Header />
+        <div className="flex justify-center items-center h-64">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-8 h-8 border-4 border-nerd-blue border-t-transparent rounded-full animate-spin" />
+            <p className="text-white/50 text-sm font-poppins">กำลังโหลดข้อมูลลูกค้า...</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

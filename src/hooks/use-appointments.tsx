@@ -18,6 +18,7 @@ export function useAppointments() {
       return data ?? [];
     },
     staleTime: 2 * 60 * 1000,
+    retry: 1,
   });
 
   useEffect(() => {
