@@ -14,14 +14,14 @@ export const useChatMessages = () => {
     const fetchInitialData = async () => {
       try {
         // Fetch webhook
-        const { data: webhookData, error: webhookError } = await supabase
+        const { data: webhookData, error: webhookError } = await (supabase as any)
           .from('webhooks')
           .select('*')
           .order('created_at', { ascending: false })
           .limit(1);
 
         if (!webhookError && webhookData && webhookData.length > 0) {
-          setWebhook(webhookData[0]);
+          setWebhook(webhookData[0] as Webhook);
         }
 
         // Fetch news for context
