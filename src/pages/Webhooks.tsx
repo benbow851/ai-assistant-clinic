@@ -42,7 +42,7 @@ const Webhooks = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('webhooks')
         .delete()
         .eq('id', id);

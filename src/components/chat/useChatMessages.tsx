@@ -25,14 +25,14 @@ export const useChatMessages = () => {
         }
 
         // Fetch news for context
-        const { data: newsData, error: newsError } = await supabase
+        const { data: newsData, error: newsError } = await (supabase as any)
           .from('news')
           .select('title, content, type, created_at')
           .order('created_at', { ascending: false })
           .limit(20);
 
         if (!newsError && newsData && newsData.length > 0) {
-          const summary = newsData.map((n, i) => 
+          const summary = (newsData as any[]).map((n: any, i: number) => 
             `[${i + 1}] ${n.title} (${n.type}, ${new Date(n.created_at).toLocaleDateString('th-TH')})\n${n.content}`
           ).join('\n\n---\n\n');
           setNewsContext(summary);

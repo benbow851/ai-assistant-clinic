@@ -13,7 +13,7 @@ export const useChatOptions = () => {
   return useQuery({
     queryKey: ['chat-options'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('chat_options')
         .select('*')
         .order('created_at', { ascending: true });
