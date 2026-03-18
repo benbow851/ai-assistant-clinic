@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Customer, MembershipStatus } from '@/types/clinic';
-import brandAmbassador from '@/assets/brand-ambassador.png';
+import nerdLogo from '@/assets/nerdoptimize-logo.png';
 import { useNavigate } from 'react-router-dom';
 
 // ── Membership avatar color ──
@@ -215,10 +215,10 @@ const HeroSection = ({
           <Plus size={16} /> เพิ่มลูกค้า
         </Button>
         <img
-          src={brandAmbassador}
-          alt="NerdOptimize Brand Ambassador"
+          src={nerdLogo}
+          alt="NerdOptimize"
           className="w-auto object-contain select-none animate-fade-in"
-          style={{ height: 180, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))', animationDelay: '100ms' }}
+          style={{ height: 80, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))', animationDelay: '100ms' }}
         />
       </div>
     </div>

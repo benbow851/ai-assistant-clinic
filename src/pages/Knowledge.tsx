@@ -7,7 +7,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/
 import { useClinicServices, useClinicFaq, useClinicStaff, ClinicService, ClinicFaq, ClinicStaff } from '@/hooks/use-knowledge';
 import { cn } from '@/lib/utils';
 import { Search, Zap, HelpCircle, Users, Clock, User, Sparkles, RefreshCw, BadgeDollarSign, Target, Calendar, Globe, Star, ClipboardList } from 'lucide-react';
-import brandAmbassador from '@/assets/brand-ambassador.png';
+import nerdLogo from '@/assets/nerdoptimize-logo.png';
 
 // ── Category badge color map ──
 const serviceCategoryColors: Record<string, string> = {
@@ -228,10 +228,10 @@ const HeroSection = ({ serviceCount, faqCount, staffCount }: { serviceCount: num
 
       <div className="hidden md:block flex-shrink-0 self-end animate-fade-in" style={{ animationDelay: '100ms' }}>
         <img
-          src={brandAmbassador}
-          alt="NerdOptimize Brand Ambassador"
+          src={nerdLogo}
+          alt="NerdOptimize"
           className="w-auto object-contain select-none"
-          style={{ height: 220, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))' }}
+          style={{ height: 80, filter: 'drop-shadow(0 -6px 28px rgba(77,98,167,0.35))' }}
         />
       </div>
     </div>

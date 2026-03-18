@@ -123,7 +123,7 @@ export const WebhookForm = ({
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('webhooks')
         .insert({ name, webhook_url: url });
 

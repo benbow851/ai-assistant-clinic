@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import type { ChatOption } from '@/hooks/use-chat-options';
 
 export const fetchChatOptions = async () => {
-  const { data, error } = await supabase
+  const { data, error } = await (supabase as any)
     .from('chat_options')
     .select('*')
     .order('created_at', { ascending: true });
@@ -18,8 +18,7 @@ export const fetchChatOptions = async () => {
 
 export const saveChatOption = async (option: ChatOption) => {
   if (option.id) {
-    // Update existing option
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('chat_options')
       .update({
         chat_text: option.chat_text,
@@ -29,8 +28,7 @@ export const saveChatOption = async (option: ChatOption) => {
     
     if (error) throw new Error(error.message);
   } else {
-    // Create new option
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('chat_options')
       .insert([{
         chat_text: option.chat_text,
@@ -42,7 +40,7 @@ export const saveChatOption = async (option: ChatOption) => {
 };
 
 export const deleteChatOption = async (id: string) => {
-  const { error } = await supabase
+  const { error } = await (supabase as any)
     .from('chat_options')
     .delete()
     .eq('id', id);

@@ -1,22 +1,21 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 
 interface ErrorStateProps {
-  onSignOut: () => void;
+  onSignOut?: () => void;
   errorMessage?: string;
 }
 
-const ErrorState: React.FC<ErrorStateProps> = ({ onSignOut, errorMessage = 'An error occurred' }) => {
-  return (
-    <div className="snes-container min-h-screen max-w-6xl">
-      <Header />
-      <div className="bg-white border border-red-500 p-6 mb-8 text-center">
-        <h2 className="font-pixelated text-2xl text-red-500 mb-2">Error loading data</h2>
-        <p className="font-retro text-snes-gray">{errorMessage}</p>
+const ErrorState = ({ onSignOut, errorMessage }: ErrorStateProps) => (
+  <div className="min-h-screen bg-background">
+    <Header />
+    <div className="flex justify-center items-center h-64">
+      <div className="flex flex-col items-center gap-4 text-center px-4">
+        <p className="text-destructive text-lg font-semibold">เกิดข้อผิดพลาด</p>
+        {errorMessage && <p className="text-muted-foreground text-sm max-w-md">{errorMessage}</p>}
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default ErrorState;
