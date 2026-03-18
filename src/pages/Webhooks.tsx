@@ -20,7 +20,7 @@ const Webhooks = () => {
   const fetchWebhooks = async () => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('webhooks')
         .select('*')
         .order('created_at', { ascending: false });
