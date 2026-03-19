@@ -31,7 +31,7 @@ const ChatDialog: React.FC<ChatDialogProps> = ({
       <DialogContent 
         hideCloseButton 
         className={`p-0 bg-snes-background border-2 border-snes-secondary rounded-lg overflow-hidden ${
-          isMobile ? 'w-[100vw] max-w-[100vw] h-[100vh] max-h-[100vh]' : 'sm:max-w-[467px]'
+          isMobile ? 'w-[100vw] max-w-[100vw] h-[100vh] max-h-[100vh]' : 'sm:max-w-[600px]'
         }`}
       >
         <DialogTitle className="sr-only">Chat with Newwy Helper</DialogTitle>
