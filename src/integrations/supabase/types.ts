@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_options: {
+        Row: {
+          chat_query: string
+          chat_text: string
+          created_at: string | null
+          id: string
+        }
+        Insert: {
+          chat_query: string
+          chat_text: string
+          created_at?: string | null
+          id?: string
+        }
+        Update: {
+          chat_query?: string
+          chat_text?: string
+          created_at?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
       clinic_appointments: {
         Row: {
           appointment_code: string
@@ -314,6 +335,75 @@ export type Database = {
           updated_at?: string | null
           working_days?: string | null
           working_hours?: string | null
+        }
+        Relationships: []
+      }
+      completed: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: string
+          title: string
+          type: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          title: string
+          type?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          title?: string
+          type?: string | null
+        }
+        Relationships: []
+      }
+      news: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: string
+          title: string
+          type: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          title: string
+          type?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          title?: string
+          type?: string | null
+        }
+        Relationships: []
+      }
+      webhooks: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          webhook_url: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          name: string
+          webhook_url: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          webhook_url?: string
         }
         Relationships: []
       }
