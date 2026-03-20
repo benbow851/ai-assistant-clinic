@@ -1,0 +1,1 @@
+CREATE POLICY "allow_all_webhooks" ON public.webhooks FOR ALL USING (true) WITH CHECK (true);
