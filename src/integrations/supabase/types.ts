@@ -14,27 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      chat_options: {
-        Row: {
-          chat_query: string
-          chat_text: string
-          created_at: string | null
-          id: string
-        }
-        Insert: {
-          chat_query: string
-          chat_text: string
-          created_at?: string | null
-          id?: string
-        }
-        Update: {
-          chat_query?: string
-          chat_text?: string
-          created_at?: string | null
-          id?: string
-        }
-        Relationships: []
-      }
       clinic_appointments: {
         Row: {
           appointment_code: string
@@ -194,48 +173,6 @@ export type Database = {
         }
         Relationships: []
       }
-      clinic_knowledge: {
-        Row: {
-          category: string
-          content: string | null
-          created_at: string | null
-          duration: string | null
-          id: string
-          is_active: boolean | null
-          price_info: string | null
-          source: string | null
-          tags: string[] | null
-          title: string
-          updated_at: string | null
-        }
-        Insert: {
-          category: string
-          content?: string | null
-          created_at?: string | null
-          duration?: string | null
-          id?: string
-          is_active?: boolean | null
-          price_info?: string | null
-          source?: string | null
-          tags?: string[] | null
-          title: string
-          updated_at?: string | null
-        }
-        Update: {
-          category?: string
-          content?: string | null
-          created_at?: string | null
-          duration?: string | null
-          id?: string
-          is_active?: boolean | null
-          price_info?: string | null
-          source?: string | null
-          tags?: string[] | null
-          title?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
       clinic_services: {
         Row: {
           age_recommendation: string | null
@@ -338,30 +275,6 @@ export type Database = {
         }
         Relationships: []
       }
-      completed: {
-        Row: {
-          content: string | null
-          created_at: string | null
-          id: string
-          title: string
-          type: string | null
-        }
-        Insert: {
-          content?: string | null
-          created_at?: string | null
-          id?: string
-          title: string
-          type?: string | null
-        }
-        Update: {
-          content?: string | null
-          created_at?: string | null
-          id?: string
-          title?: string
-          type?: string | null
-        }
-        Relationships: []
-      }
       documents: {
         Row: {
           content: string | null
@@ -380,30 +293,6 @@ export type Database = {
           embedding?: string | null
           id?: number
           metadata?: Json | null
-        }
-        Relationships: []
-      }
-      news: {
-        Row: {
-          content: string | null
-          created_at: string | null
-          id: string
-          title: string
-          type: string | null
-        }
-        Insert: {
-          content?: string | null
-          created_at?: string | null
-          id?: string
-          title: string
-          type?: string | null
-        }
-        Update: {
-          content?: string | null
-          created_at?: string | null
-          id?: string
-          title?: string
-          type?: string | null
         }
         Relationships: []
       }
