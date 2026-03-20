@@ -23,7 +23,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Navigate to="/knowledge" replace />} />
         <Route path="/webhooks" element={<Webhooks />} />
-        <Route path="/chat-editor" element={<ChatEditor />} />
+        
         <Route path="/credentials" element={<Credentials />} />
         <Route path="/knowledge" element={<Knowledge />} />
         <Route path="/customers" element={<Customers />} />

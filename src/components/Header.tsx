@@ -12,12 +12,11 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { to: '/webhooks', label: 'Webhooks' },
-    { to: '/chat-editor', label: 'Chat Editor' },
-    { to: '/credentials', label: '🔐 Credentials' },
     { to: '/knowledge', label: '📚 Knowledge Base' },
     { to: '/customers', label: '👥 Customers' },
     { to: '/appointments', label: '📅 Appointments' },
+    { to: '/webhooks', label: 'Webhooks' },
+    { to: '/credentials', label: '🔐 Credentials' },
   ];
 
   return (
