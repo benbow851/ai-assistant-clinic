@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Webhooks from "./pages/Webhooks";
-import ChatEditor from "./pages/ChatEditor";
+
 import Credentials from "./pages/Credentials";
 import Knowledge from "./pages/Knowledge";
 import Customers from "./pages/Customers";
@@ -23,7 +23,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Navigate to="/knowledge" replace />} />
         <Route path="/webhooks" element={<Webhooks />} />
-        <Route path="/chat-editor" element={<ChatEditor />} />
+        
         <Route path="/credentials" element={<Credentials />} />
         <Route path="/knowledge" element={<Knowledge />} />
         <Route path="/customers" element={<Customers />} />
