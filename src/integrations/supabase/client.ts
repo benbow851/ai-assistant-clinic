@@ -5,14 +5,10 @@
 // requiring a full page reload or imports to change.
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from './types';
-import { getCredentials } from '@/lib/supabase-credentials';
+import { getCredentials, normalizeSupabaseUrl } from '@/lib/supabase-credentials';
 
 const ENV_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const ENV_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
-
-function normalizeSupabaseUrl(url: string): string {
-  return url.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/i, '');
-}
 
 function resolveCreds(): { url: string; key: string } {
   try {
