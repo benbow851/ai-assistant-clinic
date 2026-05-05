@@ -11,28 +11,30 @@ export const useChatMessages = () => {
   const [newsContext, setNewsContext] = useState<string>('');
 
   useEffect(() => {
+    let cancelled = false;
+
     const fetchInitialData = async () => {
       try {
-        // Fetch webhook
         const { data: webhookData, error: webhookError } = await (supabase as any)
           .from('webhooks')
           .select('*')
           .order('created_at', { ascending: false })
           .limit(1);
 
-        if (!webhookError && webhookData && webhookData.length > 0) {
+        if (!cancelled && !webhookError && webhookData && webhookData.length > 0) {
           setWebhook(webhookData[0] as Webhook);
+        } else if (!cancelled && (webhookError || !webhookData || webhookData.length === 0)) {
+          setWebhook(null);
         }
 
-        // Fetch news for context
         const { data: newsData, error: newsError } = await (supabase as any)
           .from('news')
           .select('title, content, type, created_at')
           .order('created_at', { ascending: false })
           .limit(20);
 
-        if (!newsError && newsData && newsData.length > 0) {
-          const summary = (newsData as any[]).map((n: any, i: number) => 
+        if (!cancelled && !newsError && newsData && newsData.length > 0) {
+          const summary = (newsData as any[]).map((n: any, i: number) =>
             `[${i + 1}] ${n.title} (${n.type}, ${new Date(n.created_at).toLocaleDateString('th-TH')})\n${n.content}`
           ).join('\n\n---\n\n');
           setNewsContext(summary);
@@ -43,6 +45,23 @@ export const useChatMessages = () => {
     };
 
     fetchInitialData();
+
+    const onCredsChanged = () => fetchInitialData();
+    window.addEventListener('supabase-credentials-changed', onCredsChanged);
+
+    // Realtime: refetch when webhooks table changes
+    const channel = (supabase as any)
+      .channel('webhooks-chat')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'webhooks' }, () => {
+        fetchInitialData();
+      })
+      .subscribe();
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('supabase-credentials-changed', onCredsChanged);
+      (supabase as any).removeChannel(channel);
+    };
   }, []);
 
   const sendMessage = async (message: string) => {
