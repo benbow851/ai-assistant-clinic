@@ -15,6 +15,12 @@ import ChatButton from "./components/ChatButton";
 
 const queryClient = new QueryClient();
 
+if (typeof window !== "undefined") {
+  window.addEventListener("supabase-credentials-changed", () => {
+    queryClient.clear();
+  });
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
