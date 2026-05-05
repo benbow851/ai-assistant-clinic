@@ -5,7 +5,9 @@ import type { Customer, MembershipStatus } from '@/types/clinic';
 
 const membershipStatuses: MembershipStatus[] = ['new', 'silver', 'gold', 'diamond'];
 
-const normalizeCustomer = (customer: Partial<Customer>): Customer => ({
+type CustomerRow = Partial<Omit<Customer, 'membership_status'>> & { membership_status?: string | null };
+
+const normalizeCustomer = (customer: CustomerRow): Customer => ({
   id: customer.id ?? crypto.randomUUID(),
   customer_code: customer.customer_code ?? '-',
   full_name: customer.full_name ?? 'ไม่ระบุชื่อ',
@@ -38,7 +40,7 @@ export function useCustomers() {
       const { data, error } = await supabase
         .from('clinic_customers')
         .select('*')
-        .order('full_name') as { data: Customer[] | null; error: any };
+        .order('full_name') as { data: CustomerRow[] | null; error: Error | null };
       if (error) throw error;
       return (data ?? []).map(normalizeCustomer);
     },
