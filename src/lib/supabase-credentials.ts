@@ -17,6 +17,14 @@ export function normalizeSupabaseUrl(url: string): string {
   return url.trim().replace(/\/+$/, '').replace(/(?:\/rest\/v1)+$/i, '');
 }
 
+export function getProjectRefFromUrl(url: string): string {
+  try {
+    return new URL(normalizeSupabaseUrl(url)).hostname.split('.')[0] ?? '';
+  } catch {
+    return '';
+  }
+}
+
 export function getCredentials(): SupabaseCredentials {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
