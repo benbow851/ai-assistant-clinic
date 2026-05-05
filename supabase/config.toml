@@ -1,1 +1,2 @@
-project_id = "pexkiuefywrzffcopsgf"
+# Project ID is configured at runtime via the Credentials tab.
+project_id = ""
