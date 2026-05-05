@@ -46,7 +46,7 @@ if (typeof window !== 'undefined') {
 // Proxy forwards every property access to the live client instance.
 export const supabase = new Proxy({} as SupabaseClient<Database>, {
   get(_t, prop) {
-    const value = (_client as any)[prop];
+    const value = Reflect.get(_client, prop);
     return typeof value === 'function' ? value.bind(_client) : value;
   },
 }) as SupabaseClient<Database>;
