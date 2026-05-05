@@ -13,6 +13,10 @@ const DEFAULTS: SupabaseCredentials = {
   supabaseKey: '',
 };
 
+export function normalizeSupabaseUrl(url: string): string {
+  return url.trim().replace(/\/+$/, '').replace(/(?:\/rest\/v1)+$/i, '');
+}
+
 export function getCredentials(): SupabaseCredentials {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -24,7 +28,11 @@ export function getCredentials(): SupabaseCredentials {
 }
 
 export function saveCredentials(creds: SupabaseCredentials): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(creds));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    projectId: creds.projectId.trim(),
+    supabaseUrl: normalizeSupabaseUrl(creds.supabaseUrl),
+    supabaseKey: creds.supabaseKey.trim(),
+  }));
   // Dispatch event so Supabase client can reinitialize
   window.dispatchEvent(new CustomEvent('supabase-credentials-changed'));
 }
