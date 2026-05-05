@@ -5,7 +5,7 @@
 // requiring a full page reload or imports to change.
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from './types';
-import { getCredentials } from '@/lib/supabase-credentials';
+import { getCredentials, normalizeSupabaseUrl } from '@/lib/supabase-credentials';
 
 const ENV_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const ENV_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
@@ -14,12 +14,12 @@ function resolveCreds(): { url: string; key: string } {
   try {
     const c = getCredentials();
     if (c.supabaseUrl && c.supabaseKey) {
-      return { url: c.supabaseUrl, key: c.supabaseKey };
+      return { url: normalizeSupabaseUrl(c.supabaseUrl), key: c.supabaseKey.trim() };
     }
   } catch {
     /* ignore */
   }
-  return { url: ENV_URL ?? '', key: ENV_KEY ?? '' };
+  return { url: normalizeSupabaseUrl(ENV_URL ?? ''), key: ENV_KEY?.trim() ?? '' };
 }
 
 function build(): SupabaseClient<Database> {
