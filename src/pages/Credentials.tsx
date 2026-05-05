@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Shield, Save, Unplug, Eye, EyeOff, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { getCredentials, saveCredentials, clearCredentials, isConnected } from '@/lib/supabase-credentials';
+import { getCredentials, saveCredentials, clearCredentials, isConnected, getProjectRefFromUrl, normalizeSupabaseUrl } from '@/lib/supabase-credentials';
 
 const maskValue = (value: string): string => {
   if (!value || value.length <= 4) return value;
@@ -35,7 +35,12 @@ const Credentials = () => {
   }, []);
 
   const handleSave = () => {
-    if (!projectId.trim() || !supabaseUrl.trim() || !supabaseKey.trim()) {
+    const nextProjectId = projectId.trim();
+    const nextSupabaseUrl = normalizeSupabaseUrl(supabaseUrl);
+    const nextSupabaseKey = supabaseKey.trim();
+    const projectRefFromUrl = getProjectRefFromUrl(nextSupabaseUrl);
+
+    if (!nextProjectId || !nextSupabaseUrl || !nextSupabaseKey) {
       toast({
         title: 'Missing credentials',
         description: 'Please fill in all three fields before saving.',
@@ -43,11 +48,24 @@ const Credentials = () => {
       });
       return;
     }
-    saveCredentials({ projectId, supabaseUrl, supabaseKey });
+
+    if (projectRefFromUrl && projectRefFromUrl !== nextProjectId) {
+      toast({
+        title: 'Project ID does not match URL',
+        description: `This URL points to ${projectRefFromUrl}, not ${nextProjectId}. Please use matching credentials.`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    saveCredentials({ projectId: nextProjectId, supabaseUrl: nextSupabaseUrl, supabaseKey: nextSupabaseKey });
+    setProjectId(nextProjectId);
+    setSupabaseUrl(nextSupabaseUrl);
+    setSupabaseKey(nextSupabaseKey);
     setConnected(true);
     toast({
       title: 'Credentials saved',
-      description: 'Supabase client has been reinitialized with new credentials.',
+      description: 'Supabase client has been reinitialized and cached data has been refreshed.',
     });
   };
 
