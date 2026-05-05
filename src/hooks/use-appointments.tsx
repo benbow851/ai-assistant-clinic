@@ -6,7 +6,12 @@ import type { Appointment, AppointmentStatus, BookedVia } from '@/types/clinic';
 const appointmentStatuses: AppointmentStatus[] = ['confirmed', 'pending', 'cancelled', 'completed'];
 const bookedViaOptions: BookedVia[] = ['staff', 'chatbot', 'phone'];
 
-const normalizeAppointment = (appointment: Partial<Appointment>): Appointment => ({
+type AppointmentRow = Partial<Omit<Appointment, 'status' | 'booked_via'>> & {
+  status?: string | null;
+  booked_via?: string | null;
+};
+
+const normalizeAppointment = (appointment: AppointmentRow): Appointment => ({
   id: appointment.id ?? crypto.randomUUID(),
   appointment_code: appointment.appointment_code ?? '-',
   booking_date: appointment.booking_date ?? null,
@@ -39,7 +44,7 @@ export function useAppointments() {
         .from('clinic_appointments')
         .select('*')
         .order('appointment_date', { ascending: false })
-        .order('appointment_time', { ascending: false }) as { data: Appointment[] | null; error: any };
+        .order('appointment_time', { ascending: false }) as { data: AppointmentRow[] | null; error: Error | null };
       if (error) throw error;
       return (data ?? []).map(normalizeAppointment);
     },
