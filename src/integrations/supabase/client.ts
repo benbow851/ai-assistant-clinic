@@ -9,6 +9,8 @@ import { getCredentials, normalizeSupabaseUrl } from '@/lib/supabase-credentials
 
 const ENV_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const ENV_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
+const PLACEHOLDER_URL = 'https://placeholder.supabase.co';
+const PLACEHOLDER_KEY = 'placeholder-key';
 
 function resolveCreds(): { url: string; key: string } {
   try {
@@ -24,7 +26,7 @@ function resolveCreds(): { url: string; key: string } {
 
 function build(): SupabaseClient<Database> {
   const { url, key } = resolveCreds();
-  return createClient<Database>(url, key, {
+  return createClient<Database>(url || PLACEHOLDER_URL, key || PLACEHOLDER_KEY, {
     auth: {
       storage: typeof window !== 'undefined' ? window.localStorage : undefined,
       persistSession: true,
@@ -44,7 +46,7 @@ if (typeof window !== 'undefined') {
 // Proxy forwards every property access to the live client instance.
 export const supabase = new Proxy({} as SupabaseClient<Database>, {
   get(_t, prop) {
-    const value = (_client as any)[prop];
+    const value = Reflect.get(_client, prop);
     return typeof value === 'function' ? value.bind(_client) : value;
   },
 }) as SupabaseClient<Database>;
